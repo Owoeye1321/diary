@@ -58,7 +58,7 @@
     padding-bottom: 15px;
     width: 290px;
     border-radius: 15px;
-    background-color: 'rgb(229, 214, 130)';
+    background-color: rgb(229, 214, 130);
   }
   #createNewSiteInfo {
     border: 1px solid;
@@ -77,4 +77,8 @@
         marginTop: 10px;
         borderRadius: 5px;
     
+  }
+  #err {
+    font-size: 10px;
+    margin-bottom: 0px;
   }
