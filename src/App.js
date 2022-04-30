@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from './frontend/home';
+import LogIn from './frontend/login';
+import SignUp from './frontend/signup';
+import Text from './frontend/text';
 
 function App() {
   return (
@@ -15,15 +18,15 @@ function App() {
         <Route exact path = '/' element = {<Home />}/>
 
    
-       {/* <Route path='/aboutUs'  element = {<About/>}/>
+        <Route path='/text'  element = {<Text/>}/>
        
-        <Route path='/marketingService' element = {<MarketingService/>}/>
+        <Route path='/login' element = {<LogIn/>}/>
         
     
-            <Route path='/pricing'  element = {< Pricing  key = {products.id} products = {products} /> }/>
+            <Route path='/signup'  element = {< SignUp/> }/>
         
          
-        <Route  path="/contactUs"  element = {<ContactUs/>}/>
+       {/* <Route  path="/contactUs"  element = {<ContactUs/>}/>
 
         <Route  path="/cart"  element = {<Cart/>}/>
 
