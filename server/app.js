@@ -1,19 +1,32 @@
 const express = require('express')
-const  mongoose  = require('mongoose')
+const { MongoClient } = require("mongodb");
 const app = express()
 app.use(express.json())
-require('dotenv').config()
-const url = process.env.ATLAS_URI
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+  }
+const uri = process.env.ATLAS_URI
 
-mongoose.connect(url,{ useNewUrlParser: true, useCreateIndex: true })
-const connection = mongoose.connection;
-connection.once('open',()=>{
-    console.log('mongodb database established successfully')
-})
+const client = new MongoClient(uri);
+async function run() {
+    try {
+      await client.connect();
+      const database = client.db('diary');
+      const users = database.collection('user');
+      // Query for a movie that has the title 'Back to the Future'
+      const query = { title: 'gtwatt' };
+      const user = await movies.findOne(query);
+      console.log(movie);
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
 
-const PORT = process.env.PORT || 6000
+// const PORT = process.env.PORT || 6000
 
 
-app.listen(PORT, () => {
-    console.log('Listening to port' + ' ' + PORT)
-  })    
+// app.listen(PORT, () => {
+//     console.log('Listening to port' + ' ' + PORT)
+//   })    
