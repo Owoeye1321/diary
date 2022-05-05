@@ -1,16 +1,19 @@
 const express = require('express')
+const  mongoose  = require('mongoose')
 const app = express()
+app.use(express.json())
+require('dotenv').config()
+const url = process.env.ATLAS_URI
+
+mongoose.connect(url,{ useNewUrlParser: true, useCreateIndex: true })
+const connection = mongoose.connection;
+connection.once('open',()=>{
+    console.log('mongodb database established successfully')
+})
 
 const PORT = process.env.PORT || 6000
-app.post('/',(req,res)=>{
-    res.send('Hello there')
-})
 
- app.all("*",(req, res, next)=>{
-  res.send("Hello there, you seem to be on another undefined route")
-  next()
-})
 
 app.listen(PORT, () => {
     console.log('Listening to port' + ' ' + PORT)
-  })  
+  })    

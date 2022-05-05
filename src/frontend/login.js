@@ -13,6 +13,7 @@ function LogIn() {
         const newData = {...data}
         newData[e.target.id] = e.target.value
         setData(newData)
+        console.log(data)
     }
 
     const submit = async (e)=>{

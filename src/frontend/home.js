@@ -10,7 +10,7 @@ function Home(){
         <div>
             <div id = {Styles.desktop}>
             <div className = 'row' style = {{backgroundColor:'rgb(229, 214, 130)',height:'700px'}}>
-                    <div style = {{width:'100%',padding:'20px 20px 0px 20px',height:'50px'}}>
+                    <div style = {{width:'100%',padding:'20px 20px 0px 20px',height:'50px',marginBottom:'20px'}}>
                                     <h1 style = {{color:'white',float:'left'}}> Notepad</h1>
                                     <a style = {{float:'right',marginTop:'5px'}} href = '/text'><FontAwesomeIcon icon={faPencil}  size = 'xl' style = {{color:'white'}}/> </a>
                                 </div>

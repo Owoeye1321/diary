@@ -5,21 +5,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 function Text(){
+    const [log, setLog] = useState([])
     const [color, setColor] = useState('#000000')
-    const [border, setBorder] = useState('none')
+    const [txtcolor, setTxtColor ] = useState('white')
+
+    const onHandle = async (e)=>{
+        const newData = {...log}
+        newData[e.target.id] = e.target.value
+        setLog(newData)
+        console.log(log)
+    }
+
+    const Submit = async (e)=>{
+        e.preventDefault()
+
+    }
+
     return( 
         <div>
             
             <div id = {Styles.desktop}>
                     <div className = 'row' style = {{backgroundColor:'rgb(229, 214, 130)',height:'700px'}}>
-                        <div style = {{width:'100%',padding:'20px 20px 0px 20px',height:'50px'}}>
+                        <div style = {{width:'100%',padding:'20px 20px 0px 20px',height:'50px',marginBottom:'20px'}}>
                                         <h1 style = {{color:'white',float:'left'}}> Notepad</h1>
                                     <a style = {{float:'right',marginTop:'5px'}} href = '/'><FontAwesomeIcon icon={faBookmark}  size = 'xl' style = {{color:'white'}}/> </a>
                                     </div>
                         <div className="col-sm-12 col-md-5 col-lg-4">
                             <div id = {Styles.titleContent}>
                                     <div id = {Styles.readScroll}> 
-                                        <div style ={{backgroundColor:color}} onClick={()=>{setColor('rgb(229, 214, 130)')}}  id = {Styles.pick}>
+                                        <div style ={{backgroundColor:color,color:txtcolor}} onClick={()=>{setColor('white');setTxtColor('black')}}  id = {Styles.pick}>
                                             <p>Name of content</p>
                                             <p style = {{marginTop:'-20px'}}>Content written here</p>
 
@@ -33,7 +47,16 @@ function Text(){
                                 <div id = {Styles.contentDisc}>
                                     <div id = {Styles.readScroll}>
                                        <form>
-                                           <textarea name ='diary' placeholder="Enter text"  id = {Styles.text} onClick={()=>{setBorder('none')}}/>
+                                       <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'white',borderRadius:'5px',marginBottom: '10px',backgroundColor:'black',marginTop:'20px'}}/>
+                                           <textarea name ='diary' placeholder="Enter text"  style={{
+                                                   color:'white',    
+                                                   width:'100%',
+                                                   height:'500px',
+                                                   border:'none',
+                                                   borderRadius:'10px',
+                                                   backgroundColor:' black',
+                                                   padding: '10px 10px 10px 10px'
+                                           }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
                                            <input type ='submit' name = 'submit' className="form-control" value = 'send'/>
                                        </form>
                                     </div>
@@ -53,7 +76,16 @@ function Text(){
                                     <div id = {Styles.readScroll} style= {{height:'620px'}}> 
                                         
                                         <form>
-                                           <textarea name ='diary' placeholder="Enter text" on  id = {Styles.text} style = {{border:border}} onClick={()=>{setBorder('none')}}/>
+                                        <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'white',borderRadius:'5px',marginBottom: '10px'}}/>
+                                           <textarea name ='diary' placeholder="Enter text" style={{
+                                                 color:'white',    
+                                                 width:'100%',
+                                                 height:'500px',
+                                                 border:'none',
+                                                 borderRadius:'10px',
+                                                 backgroundColor:' black',
+                                                 padding: '10px 10px 10px 10px'
+                                           }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
                                            <input type ='submit' name = 'submit' className="form-control" value = 'Save'/>
                                        </form>
                                                 
