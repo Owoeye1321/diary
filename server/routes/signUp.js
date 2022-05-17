@@ -5,6 +5,7 @@ const express = require('express')
 const router = express.Router()
 router.post('/',(req,res)=>{
     const uri = process.env.ATLAS_URI
+    console.log(uri)
     const client = new MongoClient(uri);
  async function run() {
     try {

@@ -1,11 +1,24 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Styles from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
 function Home(){
     const [color, setColor] = useState('#000000')
     const [txtcolor, setTxtColor ] = useState('white')
+
+    useEffect(()=>{
+        const response = async ()=>{
+            let check = await axios.get('/check');
+            if(check.data ==='failed') window.location.assign('http://localhost:3001/login')
+            console.log(check.data)
+        }
+        response()
+        
+    })
+
+
     return( 
         <div>
             <div id = {Styles.desktop}>

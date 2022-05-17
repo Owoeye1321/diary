@@ -4,67 +4,74 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 function SignUp() { 
-    const [color, setColor ] =useState('green')
-    const [error, setError] = useState('Password must be at least 8 parameters')
+    const [error, setError] = useState('')
     const [data, setData ] = useState({
         username:'',
-        password:'',
-        email:''
+        email:'',
+        password:''
     })
-
     const handle = (e)=>{
         const newData = {...data}
         newData[e.target.id] = e.target.value
         setData(newData)
+        console.log(data)
     }
-    
-    const submit = async(e)=>{
-      
+
+    const submit = async (e)=>{
         e.preventDefault()
-        
+        const details = {
+            username:data.username,
+            email:data.email,
+            password:data.password
+        }
+         
         
     }
         
+
     return(
         
     <div>
-    <center>
-<div className = "container pt-3" style = {{marginTop:'150px'}}>
-          
-         
-                        <div id={Styles.logDiv}>
-                        <span id={Styles.Namestyle}>Login</span>
-                        <form onSubmit= {(e) => submit(e) } >
-                            <input onChange = {(e)=>handle(e)}  required className = "form-control"  style = {{
-                                width: "200px",
-                                 marginTop: "10px",
-                                    borderRadius: "5px"
-                            }} type="text" id="username" placeholder="Username"/>
-                            <input onChange = {(e)=>handle(e)}   required className = "form-control"  style = {{
-                                width: "200px",
-                                 marginTop: "10px",
-                                    borderRadius: "5px"
-                            }} type="password" id="password" placeholder="Password"/>
-                            <input onChange = {(e)=>handle(e)}   required className = "form-control"  style = {{
-                                width: "200px",
-                                 marginTop: "10px",
-                                    borderRadius: "5px"
-                            }} type="email" id="email" placeholder="Email"/>
-                           <div  id={Styles.err} >
-                                <i style={{marginBottom:"-1px",color:color}}>{error}</i>
-                                </div>
-                            <input style={{marginBottom:"-1px"}} className= "btn btn-outline-primary" type ="submit" value="submit" id = {Styles.newLove} /><br></br>   
-                            <a id={Styles.forget_password} href="/forgetPassword">Forget password?</a>                    
-                        </form>
-                        </div>
-                        <div id={Styles.createNewSiteInfo}>
-                            <span id={Styles.textfont}>Already have an account?</span> <a style = {{textDecoration:'none'}} href="/login">Login</a><br></br>
-                            </div>  
-                                     
-                           
-                    </div>
+    <div className='row'>
+                <div className='col-sm-12 col-md-4 col-lg-4'>
 
-    </center>
+                </div>
+                <div className='col-sm-12 col-md-4 col-lg-4' style = {{padding:'150px 50px 50px 50px'}}>
+	                
+	                        <h4 className="mb-3">Login</h4>
+	                        <form className="input_style_1" method="post">
+	                            <div className="form-group">
+	                                <label>Username</label>
+	                                <input onChange={(e)=>{handle(e)}} type="text" id="username" className="form-control"/>
+	                            </div>
+                                <div className="form-group">
+	                                <label>Email Address</label>
+	                                <input onChange={(e)=>{handle(e)}} type="text" id="email" className="form-control"/>
+	                            </div>
+	                            <div className="form-group">
+	                                <label> Password</label>
+	                                <input onChange={(e)=>{handle(e)}}  type="password" id="password" className="form-control"/>
+	                            </div>
+	                            <div className="clearfix mb-3">
+	                                <div className="float-left" style = {{float:'left'}}>
+                                    <i style={{fontSize:'13px'}}>Already have an account <a style = {{textDecoration:'none'}} href="/login"> Sign In</a></i>
+	                                </div>
+	                                <div className="float-right" style ={{float:'right'}}>
+	                                    <a  style={{fontSize:'13px',textDecoration:'none'}}id="forgot" href="/forgetpassword">Forgot Password?</a>
+	                                </div>
+	                            </div>
+	                            <input type= 'submit' className = 'form-control success mb-3'  />
+	                        </form>
+                        <center>© 2021 DIARY PROJECT - All Rights Reserved.</center>
+                        </div>
+
+        
+                <div className='col-sm-12 col-md-4 col-lg-4'>
+
+                </div>
+                
+
+            </div>
 </div>
 
     )
