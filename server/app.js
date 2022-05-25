@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+app.use(express.json())
 const PORT = process.env.PORT || 4040
 var session = require('express-session')
 const oneDay = 1000 * 60 * 60 * 24;
@@ -19,7 +20,7 @@ app.use('/insert',require('./routes/createUpdate'))
 app.use('/read', require('./routes/read'))
 app.use('/check',require('./routes/check'))
 
-app.use('*',( req, res)=>{
+app.all('*',( req, res)=>{
  res.send('Hello there, you seem to be lost on this server')
 })
 

@@ -1,28 +1,64 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-  }
-const express = require('express')
-const router = express.Router()
-router.post('/',(req,res)=>{
-    const uri = process.env.ATLAS_URI
-    console.log(uri)
-    const client = new MongoClient(uri);
- async function run() {
-    try {
-      await client.connect();
-      const database = client.db('diary');
-      const users = database.collection('user');
-      // Query for a movie that has the title 'Back to the Future'
-      const query = { title: 'gtwatt' };
-      const user = await movies.findOne(query);
-      console.log(movie);
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await client.close();
-    }
-  }
-  run().catch(console.dir);
+if (process.env.NODE_ENV !== "production") require('dotenv').config();
+const uri = process.env.ATLAS_URI
 
-    res.send('hello signup')
+const { MongoClient, ServerApiVersion } = require('mongodb')
+const validator = require('../controller/validator')
+const router = require('express').Router()
+router.post('/',(req, res) =>{
+   const sess = req.session
+   const username = req.body.details.username
+   const email = req.body.details.email
+   const password = req.body.details.password
+
+   const details = {
+      username:username,
+      email:email,
+      password:password
+   }
+   const validationRule ={
+      "username":'required|string',
+      "email" :"required|email",
+      "password": "required|min:6"
+  }
+  validator(details, validationRule, {}, (err, status)=>{
+     if(!status){
+        console.log('An error has occured')
+        console.log(err)
+        res.json({
+         success:"false",
+         message:"Invalid details",
+         data:{err}
+     })
+     }else{
+
+
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(async err => {
+   console.log('mongodb database connected successfully')
+  const collection = client.db("diary").collection("user");
+
+        const result  = await collection.insertOne({username:username, email:email, password:password})
+        if(result){
+           sess.username = username
+           console.log('user saved')
+           res.send('success')
+        }else{
+           res.send('invalid')
+           console.log('unable to save new user')
+        }
+
+      client.close();
+      });
+  
+     }
+  })
+
+
+   
+
 })
+
 module.exports = router
+
+
+
