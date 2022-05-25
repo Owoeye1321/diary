@@ -12,7 +12,7 @@ router.post('/',(req, res) =>{
       const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
       client.connect( async err => {
          console.log('mongodb database connected successfully')
-      const collection = client.db("diary").collection("users");
+      const collection = client.db("diary").collection("user");
       const result = await collection.findOne({ username: username, password: password})
       if(result){
          sess.username = username
