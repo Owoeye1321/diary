@@ -7,6 +7,8 @@ import axios from "axios";
 function Home(){
     const [color, setColor] = useState('#000000')
     const [txtcolor, setTxtColor ] = useState('white')
+    const [body, setBody ] = useState([])
+
 
     useEffect(()=>{
         const response = async ()=>{
@@ -15,9 +17,28 @@ function Home(){
             console.log(check.data)
         }
         response()
-        
-    })
 
+
+         const fetchAll = async () =>{
+            const result = await axios.get('/read')
+            if(result.data.length){
+                setBody(result.data)
+            }else{
+                console.log('Invalid data')
+            }
+
+         }
+            const interval = setInterval (()=>{
+                fetchAll()
+            },1000)
+
+            return()=>{
+                    clearInterval(interval)
+            }
+        
+    },[])
+
+  console.log(body)
 
     return( 
         <div>
@@ -30,12 +51,19 @@ function Home(){
                         <div className="col-sm-12 col-md-5 col-lg-4">
                             <div id = {Styles.titleContent}>
                                     <div id = {Styles.readScroll}> 
-                                        <div style ={{backgroundColor:color,color:txtcolor}} onClick={()=>{setColor('white');setTxtColor('black')}}  id = {Styles.pick}>
-                                            <p>Name of content</p>
-                                            <p style = {{marginTop:'-20px'}}>Content written here</p>
+                                           {body.map((key)=>{
+                                               return(
+                                                <div key={key._id}
+                                                style ={{backgroundColor:color,color:txtcolor}}
+                                                 onClick={()=>{setColor('white');setTxtColor('black')}}  
+                                                 id = {Styles.pick}>
+                                                     <p>key.title</p>
+                                                      <p style = {{marginTop:'-20px'}}>key.body</p>
 
-                                        </div>
-                                        
+                                                  </div>
+                                               )
+                                           })}
+                                            
                                     </div>
                             </div>
                         </div>   

@@ -1,9 +1,11 @@
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const app = express()
 app.use(express.json())
 const PORT = process.env.PORT || 4040
 var session = require('express-session')
 const oneDay = 1000 * 60 * 60 * 24;
+app.use(cookieParser())
 app.use(session({
   cookie:{
     secure: true,
@@ -14,6 +16,12 @@ app.use(session({
   cookie:{maxAge:oneDay},
   resave:false
 }))
+app.use(function(req,res,next){
+  if(!req.session){
+      return next(new Error('Oh no')) //handle error
+  }
+  next() //otherwise continue
+  });
 app.use('/login',require('./routes/login'))
 app.use('/signUp',require('./routes/signUp'))
 app.use('/insert',require('./routes/createUpdate'))

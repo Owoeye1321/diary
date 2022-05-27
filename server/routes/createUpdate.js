@@ -1,20 +1,34 @@
+if (process.env.NODE_ENV !== "production") require('dotenv').config();
+const uri = process.env.ATLAS_URI
+
+const { MongoClient, ServerApiVersion } = require('mongodb')
 const router = require('express').Router()
 router.post('/',(req, res) =>{
-   const username = req.body.username
-   const password = req.body.password
-   
+   const sess = req.session
+   const title = req.body.details.title
+   const body = req.body.details.body
+   const user = sess.username
+if(user){
+   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+   client.connect( async err => {
+   const collection = client.db("diary").collection("notes");
+   const result = await collection.insertOne({title:title, body:body, user:user})
+   if(result){
+      console.log('data saved successfully')
+      res.send('success')
+   }else{
+      console.log('An error has occured')
+      res.send('error')
+   }
+   client.close();
+   });
+
+}else{
+   console.log('Authentication required')
+}
+
+
 
 })
 
 module.exports = router
-
-
-
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://mongo:<password>@cluster0.8tjy2.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Styles from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faBookmark } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'
 
 function Text(){
     const [log, setLog] = useState([])
@@ -13,11 +14,36 @@ function Text(){
         const newData = {...log}
         newData[e.target.id] = e.target.value
         setLog(newData)
-        console.log(log)
     }
 
-    const Submit = async (e)=>{
+    const SubmitDesktop = async (e)=>{
         e.preventDefault()
+        const details = {
+            title:log.title,
+            body:log.body
+        }
+        const result = await axios.post('/insert',{details})
+        if(result.data === 'success'){
+           alert('Data saved successfully')
+            window.location.assign('http://localhost:3000/')
+        }else{
+            console.log(result.data)
+        }
+
+    }
+    const SubmitMobile= async (e)=>{
+        e.preventDefault()
+        const details = {
+            title:log.title,
+            body:log.body
+        }
+        const result = await axios.post('/insert',{details})
+        if(result.data === 'success'){
+            alert('Data saved successfully')
+            window.location.assign('http://localhost:3000/')
+        }else{
+            console.log(result.data)
+        }
 
     }
 
@@ -46,9 +72,9 @@ function Text(){
                             <div className="col-sm-12 col-md-7 col-lg-8">
                                 <div id = {Styles.contentDisc}>
                                     <div id = {Styles.readScroll}>
-                                       <form>
+                                       <form onSubmit = {(e)=>SubmitDesktop(e)}>
                                        <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'white',borderRadius:'5px',marginBottom: '10px',backgroundColor:'black',marginTop:'20px'}}/>
-                                           <textarea name ='diary' placeholder="Enter text"  style={{
+                                           <textarea required name ='diary' placeholder="Enter text"  style={{
                                                    color:'white',    
                                                    width:'100%',
                                                    height:'500px',
@@ -75,9 +101,9 @@ function Text(){
             <div id = {Styles.titleContent} style= {{height:'700px'}}>
                                     <div id = {Styles.readScroll} style= {{height:'620px'}}> 
                                         
-                                        <form>
-                                        <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'white',borderRadius:'5px',marginBottom: '10px'}}/>
-                                           <textarea name ='diary' placeholder="Enter text" style={{
+                                        <form onSubmit = {(e)=>SubmitMobile(e)}>
+                                        <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'black',borderRadius:'5px',marginBottom: '10px'}}/>
+                                           <textarea required name ='diary' placeholder="Enter text" style={{
                                                  color:'white',    
                                                  width:'100%',
                                                  height:'500px',
