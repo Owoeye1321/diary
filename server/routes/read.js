@@ -2,14 +2,14 @@ if (process.env.NODE_ENV !== "production") require('dotenv').config();
 const uri = process.env.ATLAS_URI
 
 const router = require('express').Router()
-const { MongoClient, ServerApiVersion } = require('mongodb');
+   const { MongoClient, ServerApiVersion } = require('mongodb');
+ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 router.get('/',(req, res) =>{
    const sess = req.session
    if(sess.username){
       const username = sess.username
       console.log(username)
-         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
          client.connect(async err => {
          const collection = client.db("diary").collection("notes");
          const result = await collection.find({user:username}).toArray()
@@ -18,7 +18,7 @@ router.get('/',(req, res) =>{
                console.log('working on result')
                result.map((key)=>{
                   console.log(key._id)
-                  console.log(key.title)
+                        console.log(key.title)
                   console.log(key.body)
                })
             }else{
