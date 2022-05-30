@@ -25,7 +25,7 @@ function SignUp() {
         }
         const result = await axios.post('/signup',{details})
         if(result.data === 'success'){
-            window.location.assign('http://localhost:3000/')
+            window.location.assign('http://localhost:3001/')
         }else{
             setError('invalid details')
             console.log(result.data)

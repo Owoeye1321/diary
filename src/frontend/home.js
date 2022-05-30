@@ -14,7 +14,7 @@ function Home(){
     useEffect(()=>{
         const response = async ()=>{
             let check = await axios.get('/check');
-            if(check.data ==='failed') window.location.assign('http://localhost:3000/login')
+            if(check.data ==='failed') window.location.assign('http://localhost:3001/login')
             console.log(check.data)
         }
         response()
