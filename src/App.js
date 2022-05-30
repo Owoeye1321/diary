@@ -25,15 +25,7 @@ function App() {
     
             <Route path='/signup'  element = {< SignUp/> }/>
         
-         
-       {/* <Route  path="/contactUs"  element = {<ContactUs/>}/>
-
-        <Route  path="/cart"  element = {<Cart/>}/>
-
-        <Route  path="/login"  element = {<Login/>}/>
-
-        <Route  path="/signUp"  element = {<SignUp/>}/>
-        <Route  path="/simplePaystackPaymentPageForAddriggo"  element = {<App/>}/> */}
+       
 
         </Routes>
 

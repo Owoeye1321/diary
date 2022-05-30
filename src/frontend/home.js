@@ -8,7 +8,8 @@ function Home(){
     const [color, setColor] = useState('#000000')
     const [txtcolor, setTxtColor ] = useState('white')
     const [body, setBody ] = useState([])
-
+    const [getMessage, setGetMessage ] = useState ('Content would be displayed soon')
+ 
 
     useEffect(()=>{
         const response = async ()=>{
@@ -38,6 +39,17 @@ function Home(){
         
     },[])
 
+    const setBodyMessageToRead = async (ObjectId)=>{
+        const messageId = ObjectId
+        const result = await axios.post('/fetchBody',messageId)
+        if(result.data){
+            const details = result.data
+            details.map((key)=>{
+                setGetMessage(key.body)
+            })
+        }
+    }
+
   console.log(body)
 
     return( 
@@ -51,18 +63,23 @@ function Home(){
                         <div className="col-sm-12 col-md-5 col-lg-4">
                             <div id = {Styles.titleContent}>
                                     <div id = {Styles.readScroll}> 
-                                           {body.map((key)=>{
+                                           { body ? body.map((key)=>{
                                                return(
                                                 <div key={key._id}
-                                                style ={{backgroundColor:color,color:txtcolor}}
-                                                 onClick={()=>{setColor('white');setTxtColor('black')}}  
+                                                style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px'}}
                                                  id = {Styles.pick}>
-                                                     <p>key.title</p>
-                                                      <p style = {{marginTop:'-20px'}}>key.body</p>
+                                                     <p  onClick={()=>setBodyMessageToRead(key._id)}>{key.title}</p>
+                                                      <p style = {{marginTop:'-20px'}}>{key.body}</p>
 
                                                   </div>
                                                )
-                                           })}
+                                           }) :   <div
+                                           style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px'}}
+                                            id = {Styles.pick}>
+                                                <p>Empty notes</p>
+                                                 <p style = {{marginTop:'-20px'}}>Start saving notes</p>
+
+                                             </div>}
                                             
                                     </div>
                             </div>
@@ -71,8 +88,8 @@ function Home(){
                             <div className="col-sm-12 col-md-7 col-lg-8">
                                 <div id = {Styles.contentDisc}>
                                     <div id = {Styles.readScroll}>
-                                        <h1>Content would be displayed here</h1>
-                                        <h1>Content would be displayed here</h1>
+                                        <h1>{getMessage}</h1>
+                                       
                                     </div>
                                       
                                 </div>
@@ -88,11 +105,21 @@ function Home(){
                 </div>
             <div id = {Styles.titleContent}>
                                     <div id = {Styles.readScroll}> 
-                                        <div style ={{backgroundColor:color}} onClick={()=>{setColor('rgb(229, 214, 130)')}}  id = {Styles.pick}>
-                                            <p>Name of content</p>
-                                            <p style = {{marginTop:'-20px'}}>Content written here</p>
-                                                
-                                        </div>
+                                    { body ? body.map((key)=>{
+                                               return(
+                                                <div key={key._id}
+                                                style ={{backgroundColor:color,marginBottom:'10px'}}
+                                                 id = {Styles.pick}>
+                                                       <p  onClick={()=>setBodyMessageToRead(key._id)}>{key.title}</p>
+                                                      <p style = {{marginTop:'-20px'}}>{key.body}</p>
+
+                                                  </div>
+                                               )
+                                           }) :   <div
+                                           style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px'}}
+                                            id = {Styles.pick}>
+                                                <h1>{getMessage}</h1>
+                                             </div>}
                                         
                                     </div>
                             </div>
