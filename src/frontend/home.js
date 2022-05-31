@@ -13,7 +13,8 @@ function Home(){
     const [noneForM, setNoneForM ] = useState('none')
     const [getMessage, setGetMessage ] = useState ('Content would be displayed soon')
     const [newTake, setNewTake ] = useState('block')
-    const [updateDisplay, setUpdateDisplay ] = useState('none')
+    const [block, setBlock ] = useState('none')
+    const [none, setNone] = useState('none')
 
     const onHandle = async (e)=>{
         const newData = {...log}
@@ -138,7 +139,7 @@ function Home(){
                             <div className="col-sm-12 col-md-7 col-lg-8">
                                 <div onClick={()=> {
                                     setNewTake('none');
-                                    setUpdateDisplay('block')
+                                    setBlock('block')
                                     }} 
                                     id = {Styles.contentDisc} style ={{display:newTake}}>
                                     <div className="p-2" id = {Styles.readScroll}>
@@ -148,11 +149,14 @@ function Home(){
                                       
                                 </div>
                                 <div id={Styles.contentDisc}>
-                                <div id = {Styles.readScroll} style= {{height:'620px',display:updateDisplay}}> 
+                                <div className="py-4" id = {Styles.readScroll} style= {{height:'620px',display:block}}> 
                                         
                                 <form onSubmit = {(e)=>SubmitDesktop(e)}>
-                                       <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'white',borderRadius:'5px',marginBottom: '10px',backgroundColor:'black',marginTop:'20px'}}/>
-                                           <textarea required name ='diary' placeholder="Enter text"  style={{
+                                               <textarea 
+                                                   text={getMessage}
+                                                   required
+                                                   placeholder="Enter text"  
+                                                   style={{
                                                    color:'white',    
                                                    width:'100%',
                                                    height:'500px',
@@ -208,7 +212,7 @@ function Home(){
                             <div style = {{display:noneForM}} className  = 'm-3'>
                                 <div onClick={()=> {
                                     setNoneForM('none')
-                                    setUpdateDisplay('block')
+                                    setNone('block')
                                     }} 
                                      id = {Styles.contentDisc}>
                                     <div className="p-2" id = {Styles.readScroll}>
@@ -219,26 +223,15 @@ function Home(){
                                 </div>
                             
                             </div>
-                            <div id = {Styles.titleContent} style= {{height:'700px',display:updateDisplay}}>
-                                    <div id = {Styles.readScroll} style= {{height:'620px'}}> 
+                            <div id = {Styles.titleContent} style= {{height:'700px',display:none}}>
+                                    <div className="py-5" id = {Styles.readScroll} style= {{height:'620px'}}> 
                                         
                                         <form onSubmit = {(e)=>SubmitMobile(e)}>
-                                        <input 
-                                        className="form-control" 
-                                        type="text" 
-                                        required 
-                                        onChange = {(e)=>onHandle(e)} 
-                                        placeholder="Title" 
-                                        id="title" 
-                                        style= {{
-                                        color:'black',
-                                        borderRadius:'5px',
-                                        marginBottom: '10px'
-                                        }}/>
+                                            <h4 style={{color:"black"}}>{getMessage}</h4>
                                            <textarea 
+                                                 placeholder="Edit text"
+                                                 value={getMessage}
                                                  required
-                                                 name ='diary' 
-                                                 placeholder="Enter text" 
                                                  style={{
                                                  color:'white',    
                                                  width:'100%',
