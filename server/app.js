@@ -28,6 +28,7 @@ app.use('/login',require('./routes/login'))
        app.use('/read', require('./routes/read'))
   app.use('/check',require('./routes/check'))
   app.use('/update', require('./routes/update'))
+  app.use('/fetchbody', require('./routes/fetchbody'))
 
 app.all('*',( req, res)=>{
   res.send('Hello there, you seem to be lost on this server')
