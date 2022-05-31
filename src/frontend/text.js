@@ -25,7 +25,7 @@ function Text(){
         const result = await axios.post('/insert',{details})
         if(result.data === 'success'){
            alert('Data saved successfully')
-            window.location.assign('http://localhost:3000/')
+            window.location.assign('http://localhost:3001/')
         }else{
             console.log(result.data)
         }
@@ -40,7 +40,7 @@ function Text(){
         const result = await axios.post('/insert',{details})
         if(result.data === 'success'){
             alert('Data saved successfully')
-            window.location.assign('http://localhost:3000/')
+            window.location.assign('http://localhost:3001/')
         }else{
             console.log(result.data)
         }
