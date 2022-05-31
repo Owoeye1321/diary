@@ -7,11 +7,50 @@ import axios from "axios";
 function Home(){
     const [color, setColor] = useState('#000000')
     const [txtcolor, setTxtColor ] = useState('white')
+    const [log, setLog] = useState([])
     const [body, setBody ] = useState([])
     const [blockForI, setBlockForI] = useState('block')
     const [noneForM, setNoneForM ] = useState('none')
     const [getMessage, setGetMessage ] = useState ('Content would be displayed soon')
- 
+    const [newTake, setNewTake ] = useState('block')
+    const [updateDisplay, setUpdateDisplay ] = useState('none')
+
+    const onHandle = async (e)=>{
+        const newData = {...log}
+        newData[e.target.id] = e.target.value
+        setLog(newData)
+    }
+
+    const SubmitDesktop = async (e)=>{
+        e.preventDefault()
+        const details = {
+            title:log.title,
+            body:log.body
+        }
+        const result = await axios.post('/insert',{details})
+        if(result.data === 'success'){
+           alert('Data saved successfully')
+            window.location.assign('http://localhost:3001/')
+        }else{
+            console.log(result.data)
+        }
+
+    }
+    const SubmitMobile= async (e)=>{
+        e.preventDefault()
+        const details = {
+            title:log.title,
+            body:log.body
+        }
+        const result = await axios.post('/insert',{details})
+        if(result.data === 'success'){
+            alert('Data saved successfully')
+            window.location.assign('http://localhost:3001/')
+        }else{
+            console.log(result.data)
+        }
+
+    }
 
     useEffect(()=>{
         const response = async ()=>{
@@ -43,6 +82,7 @@ function Home(){
     },[])
 
     const setBodyMessageToRead = async (ObjectId)=>{
+        if(newTake === 'none') setNewTake('block');
         const messageId = ObjectId
         console.log(messageId)
         const result = await axios.post('/fetchBody',{messageId:messageId})
@@ -96,13 +136,36 @@ function Home(){
                         </div>   
 
                             <div className="col-sm-12 col-md-7 col-lg-8">
-                                <div id = {Styles.contentDisc}>
+                                <div onClick={()=> {
+                                    setNewTake('none');
+                                    setUpdateDisplay('block')
+                                    }} 
+                                    id = {Styles.contentDisc} style ={{display:newTake}}>
                                     <div className="p-2" id = {Styles.readScroll}>
-                                        <h6>{getMessage}</h6 >
+                                        <h6>{getMessage}</h6>
                                        
                                     </div>
                                       
                                 </div>
+                                <div id={Styles.contentDisc}>
+                                <div id = {Styles.readScroll} style= {{height:'620px',display:updateDisplay}}> 
+                                        
+                                <form onSubmit = {(e)=>SubmitDesktop(e)}>
+                                       <input className="form-control" type="text" required onChange = {(e)=>onHandle(e)} placeholder="Title" id="title" style= {{color:'white',borderRadius:'5px',marginBottom: '10px',backgroundColor:'black',marginTop:'20px'}}/>
+                                           <textarea required name ='diary' placeholder="Enter text"  style={{
+                                                   color:'white',    
+                                                   width:'100%',
+                                                   height:'500px',
+                                                   border:'none',
+                                                   borderRadius:'10px',
+                                                   backgroundColor:' black',
+                                                   padding: '10px 10px 10px 10px'
+                                           }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
+                                           <input type ='submit' name = 'submit' className="form-control" value = 'send'/>
+                                       </form>
+                                                
+                                    </div>
+                                 </div>
                             
                             </div>
 
@@ -143,7 +206,11 @@ function Home(){
                                     </div>
                             </div>
                             <div style = {{display:noneForM}} className  = 'm-3'>
-                                <div id = {Styles.contentDisc}>
+                                <div onClick={()=> {
+                                    setNoneForM('none')
+                                    setUpdateDisplay('block')
+                                    }} 
+                                     id = {Styles.contentDisc}>
                                     <div className="p-2" id = {Styles.readScroll}>
                                         <h6>{getMessage}</h6 >
                                        
@@ -151,6 +218,40 @@ function Home(){
                                       
                                 </div>
                             
+                            </div>
+                            <div id = {Styles.titleContent} style= {{height:'700px',display:updateDisplay}}>
+                                    <div id = {Styles.readScroll} style= {{height:'620px'}}> 
+                                        
+                                        <form onSubmit = {(e)=>SubmitMobile(e)}>
+                                        <input 
+                                        className="form-control" 
+                                        type="text" 
+                                        required 
+                                        onChange = {(e)=>onHandle(e)} 
+                                        placeholder="Title" 
+                                        id="title" 
+                                        style= {{
+                                        color:'black',
+                                        borderRadius:'5px',
+                                        marginBottom: '10px'
+                                        }}/>
+                                           <textarea 
+                                                 required
+                                                 name ='diary' 
+                                                 placeholder="Enter text" 
+                                                 style={{
+                                                 color:'white',    
+                                                 width:'100%',
+                                                 height:'500px',
+                                                 border:'none',
+                                                 borderRadius:'10px',
+                                                 backgroundColor:' black',
+                                                 padding: '10px 10px 10px 10px'
+                                           }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
+                                           <input type ='submit' name = 'submit' className="form-control" value = 'Save'/>
+                                       </form>
+                                                
+                                    </div>
                             </div>
             </div>
         </div>
