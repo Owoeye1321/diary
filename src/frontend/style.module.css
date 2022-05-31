@@ -1,5 +1,5 @@
 #titleContent{
-    height:550px;
+    height:620px;
     width:100%;
     color:white;
     overflow: hidden;
@@ -34,7 +34,12 @@
     padding:10px 10px 10px 10px;
 }
 #readScroll{
-    height:750px;
+    height:620px;
+    margin-right: -50px;
+    padding-right: 50px; 
+    top: 0;
+    bottom: 0;
+    left: 0;
     overflow-y: scroll;
     scrollbar-width: none;
 }
