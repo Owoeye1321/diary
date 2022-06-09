@@ -15,6 +15,7 @@ router.post('/',(req, res) =>{
          client.connect(async err => {
          const collection = client.db("diary").collection("notes");
          const getId = req.body.messageId
+         sess.updateId = getId
          console.log(getId)
          const result = await collection.findOne({_id:ObjectId(getId)})
             if(result){

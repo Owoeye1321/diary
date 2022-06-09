@@ -7,7 +7,6 @@ import axios from "axios";
 function Home(){
     const [color, setColor] = useState('#000000')
     const [txtcolor, setTxtColor ] = useState('white')
-    const [log, setLog] = useState([])
     const [body, setBody ] = useState([])
     const [blockForI, setBlockForI] = useState('block')
     const [noneForM, setNoneForM ] = useState('none')
@@ -22,13 +21,9 @@ function Home(){
         setGetMessage(e.target.value)
     }
 
-    const SubmitDesktop = async (e)=>{
+    const SubmitUpdateForDesktop = async (e)=>{
         e.preventDefault()
-        const details = {
-            title:log.title,
-            body:log.body
-        }
-        const result = await axios.post('/insert',{details})
+        const result = await axios.post('/insert',{body:getMessage})
         if(result.data === 'success'){
            alert('Data saved successfully')
             window.location.assign('http://localhost:3001/')
@@ -40,8 +35,7 @@ function Home(){
     const SubmitMobile= async (e)=>{
         e.preventDefault()
         const details = {
-            title:log.title,
-            body:log.body
+            body:getMessage
         }
         const result = await axios.post('/insert',{details})
         if(result.data === 'success'){
@@ -88,6 +82,8 @@ function Home(){
         console.log(messageId)
         const result = await axios.post('/fetchBody',{messageId:messageId})
         if(result.data){
+            console.log('working...')
+            console.log(result.data._id)
             setGetMessage(result.data.body)
         }
     }
@@ -151,7 +147,7 @@ function Home(){
                                 <div id={Styles.contentDisc}>
 
                                 <div className="py-4" id = {Styles.readScroll} style= {{height:'620px',display:block}}> 
-                                <form onSubmit = {(e)=>SubmitDesktop(e)}>
+                                <form onSubmit = {(e)=>SubmitUpdateForDesktop(e)}>
                                                <textarea 
                                                    type = 'text'
                                                    value={getMessage}

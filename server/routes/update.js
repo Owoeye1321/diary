@@ -6,12 +6,13 @@ if(process.env.NODE_ENV !== 'production') require('dotenv').config()
 const router = require('express').Router()
 
 router.post('/',(req, res)=>{
-    const id = req.body.details.id   
-        const title = req.body.details.title
-            const body = req.body.details.body
+    const sess = req.session
+    if(sess.user){
+        const UpdateRef = sess.updateId
+        const body = req.body.body
         client.connect( async err =>{
             const collection = client.db('diary').collection('notes')
-                const result = collection.update({_id:id}, {title:title, body:body})
+                const result = collection.updateOne({_id:ObjectId(UpdateRef)} , {$set:{body:body}})
             if(result){
                 res.send('success') 
                     console.log('Processing result boss')
@@ -20,6 +21,8 @@ router.post('/',(req, res)=>{
                 console.log('An huge error has occured')
             }
         })
+    }
+         
 })
 
 module.exports = router
