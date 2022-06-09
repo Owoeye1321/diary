@@ -15,11 +15,11 @@ function Home(){
     const [newTake, setNewTake ] = useState('block')
     const [block, setBlock ] = useState('none')
     const [none, setNone] = useState('none')
+   
 
     const onHandle = async (e)=>{
-        const newData = {...log}
-        newData[e.target.id] = e.target.value
-        setLog(newData)
+        console.log(e.target.value)
+        setGetMessage(e.target.value)
     }
 
     const SubmitDesktop = async (e)=>{
@@ -149,11 +149,12 @@ function Home(){
                                       
                                 </div>
                                 <div id={Styles.contentDisc}>
+
                                 <div className="py-4" id = {Styles.readScroll} style= {{height:'620px',display:block}}> 
-                                        
                                 <form onSubmit = {(e)=>SubmitDesktop(e)}>
                                                <textarea 
-                                                   text={getMessage}
+                                                   type = 'text'
+                                                   value={getMessage}
                                                    required
                                                    placeholder="Enter text"  
                                                    style={{
@@ -165,7 +166,7 @@ function Home(){
                                                    backgroundColor:' black',
                                                    padding: '10px 10px 10px 10px'
                                            }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
-                                           <input type ='submit' name = 'submit' className="form-control" value = 'send'/>
+                                           <input  type ='submit' className="form-control my-4" value = 'send'/>
                                        </form>
                                                 
                                     </div>
@@ -227,9 +228,8 @@ function Home(){
                                     <div className="py-5" id = {Styles.readScroll} style= {{height:'620px'}}> 
                                         
                                         <form onSubmit = {(e)=>SubmitMobile(e)}>
-                                            <h4 style={{color:"black"}}>{getMessage}</h4>
                                            <textarea 
-                                                 placeholder="Edit text"
+                                                 type = 'text'
                                                  value={getMessage}
                                                  required
                                                  style={{
@@ -241,7 +241,7 @@ function Home(){
                                                  backgroundColor:' black',
                                                  padding: '10px 10px 10px 10px'
                                            }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
-                                           <input type ='submit' name = 'submit' className="form-control" value = 'Save'/>
+                                           <input  type ='submit' name = 'submit' className="form-control my-3" value = 'Save'/>
                                        </form>
                                                 
                                     </div>
