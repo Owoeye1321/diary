@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Styles from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil ,  faBookmark} from '@fortawesome/free-solid-svg-icons';
+import { faPencil ,  faBookmark, faTrashCan} from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 function Home(){
     const [color, setColor] = useState('#000000')
@@ -23,28 +23,38 @@ function Home(){
 
     const SubmitUpdateForDesktop = async (e)=>{
         e.preventDefault()
-        const result = await axios.post('/insert',{body:getMessage})
-        if(result.data === 'success'){
-           alert('Data saved successfully')
+        const updateResponse = await axios.post('/update',{body:getMessage})
+        if(updateResponse.data === 'success'){
+           alert('Data updated successfully')
             window.location.assign('http://localhost:3001/')
         }else{
-            console.log(result.data)
+            console.log(updateResponse.data)
         }
 
     }
     const SubmitMobile= async (e)=>{
         e.preventDefault()
-        const details = {
-            body:getMessage
-        }
-        const result = await axios.post('/insert',{details})
-        if(result.data === 'success'){
-            alert('Data saved successfully')
+        const updateResponse = await axios.post('/update',{body:getMessage})
+        if(updateResponse.data === 'success'){
+            alert('Data updated successfully')
             window.location.assign('http://localhost:3001/')
         }else{
-            console.log(result.data)
+            console.log(updateResponse.data)
         }
 
+    }
+
+    const trashDiary = async (trashId)=>{
+        const trashingId = trashId
+        console.log(trashingId)
+        const trashResult = await axios.post('/trash',{trashingId:trashingId})
+        
+        if(trashResult.data === 'success'){
+            alert('Diary deleted successfully')
+        }else{
+            console.log(trashResult.data)
+        }
+        
     }
 
     useEffect(()=>{
@@ -77,6 +87,7 @@ function Home(){
     },[])
 
     const setBodyMessageToRead = async (ObjectId)=>{
+        alert('Processing to read document')
         if(newTake === 'none') setNewTake('block');
         const messageId = ObjectId
         console.log(messageId)
@@ -109,15 +120,27 @@ function Home(){
                                 </div>
                         <div className="col-sm-12 col-md-5 col-lg-4">
                             <div id = {Styles.titleContent}>
-                                    <div id = {Styles.readScroll}> 
+                                    <div id = {Styles.readScroll} > 
                                            { body ? body.map((key)=>{
                                                return(
-                                                <div key={key._id}
-                                                style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px'}}
-                                                 id = {Styles.pick}>
-                                                     <p  onClick={()=>{setBodyMessageToRead(key._id)}}>{key.title}</p>
-                                                      <p style = {{marginTop:'-20px',fontSize:'10px'}}>{key.body.substring(0,30)}</p>
+                                                <div  key={key._id}
+                                                style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px',width:'100%',height:'60px'}}
+                                                 id = {Styles.pick}
+                                                 >
+                                                    <div style = {{width:'80%',float:'left'}}>
+                                                    <p  onClick={()=>{setBodyMessageToRead(key._id)}}>{key.title}</p>
+                                                      <p style = {{marginTop:'-20px',fontSize:'10px'}}>{key.body.substring(0,50)}</p>
+                                               
+                                                    </div>
+                                                  
+                                                <div style={{float:"right", width:'5%'}}>
+                                                <center>
+                                                     <FontAwesomeIcon onClick={()=>{
+                                                         trashDiary(key._id)
+                                                     }} icon={faTrashCan}  size = 'xl' style = {{color:'white',height:'15px'}}/>
+                                                </center>
 
+                                                     </div>
                                                   </div>
                                                )
                                            }) :   <div
@@ -144,7 +167,7 @@ function Home(){
                                     </div>
                                       
                                 </div>
-                                <div id={Styles.contentDisc}>
+                                <div id={Styles.contentDisc} style= {{height:'620px',display:block}}>
 
                                 <div className="py-4" id = {Styles.readScroll} style= {{height:'620px',display:block}}> 
                                 <form onSubmit = {(e)=>SubmitUpdateForDesktop(e)}>
@@ -162,7 +185,7 @@ function Home(){
                                                    backgroundColor:' black',
                                                    padding: '10px 10px 10px 10px'
                                            }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
-                                           <input  type ='submit' className="form-control my-4" value = 'send'/>
+                                           <input  type ='submit' className="form-control my-4" value = 'Update'/>
                                        </form>
                                                 
                                     </div>
@@ -182,23 +205,29 @@ function Home(){
                 </div>
             <div id = {Styles.titleContent} style = {{display:blockForI}}>
                                     <div id = {Styles.readScroll}> 
-                                    { body ? body.map((key)=>{
+                                      { body ? body.map((key)=>{
                                                return(
-                                                <div key={key._id}
-                                                style ={{backgroundColor:color,marginBottom:'10px'}}
-                                                 id = {Styles.pick}>
-                                                       <p  
-                                                       onClick={()=> { 
-                                                           setBodyMessageToRead(key._id);
-                                                           setBlockForI('none')
-                                                           setNoneForM('block')
-                                                           }}>
-                                                           {key.title}</p>
-                                                      <p style = {{marginTop:'-20px',fontSize:'10px'}}>{key.body.substring(0,30)}</p>
+                                                <div  key={key._id}
+                                                style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px',width:'100%',height:'60px'}}
+                                                 id = {Styles.pick}
+                                                 >
+                                                    <div style = {{width:'80%',float:'left'}}>
+                                                    <p  onClick={()=>{setBodyMessageToRead(key._id)}}>{key.title}</p>
+                                                      <p style = {{marginTop:'-20px',fontSize:'10px'}}>{key.body.substring(0,50)}</p>
+                                               
+                                                    </div>
+                                                  
+                                                <div style={{float:"right", width:'5%'}}>
+                                                <center>
+                                                     <FontAwesomeIcon onClick={()=>{
+                                                          trashDiary(key._id)
+                                                     }} icon={faTrashCan}  size = 'xl' style = {{color:'white',height:'15px'}}/>
+                                                </center>
 
+                                                     </div>
                                                   </div>
                                                )
-                                           }) :   <div
+                                           }):   <div
                                            style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px'}}
                                             id = {Styles.pick}>
                                                 <h1>{getMessage}</h1>
