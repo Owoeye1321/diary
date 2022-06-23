@@ -78,7 +78,7 @@ function Home(){
          fetchAll()
             const interval = setInterval (()=>{
                 fetchAll()
-            },60000)
+            },10000)
 
             return()=>{
                     clearInterval(interval)
