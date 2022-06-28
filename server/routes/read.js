@@ -1,16 +1,11 @@
-if (process.env.NODE_ENV !== "production") require('dotenv').config();
-const uri = process.env.ATLAS_URI
-
 const router = require('express').Router()
-   const { MongoClient, ServerApiVersion } = require('mongodb');
- const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+   const client = require('../controller/client')
 
-router.get('/',(req, res) =>{
+router.get('/',async (req, res) =>{
    const sess = req.session
    if(sess.username){
       const username = sess.username
       console.log(username)
-         client.connect(async err => {
          const collection = client.db("diary").collection("notes");
          const result = await collection.find({user:username}).toArray()
             if(result){
@@ -24,7 +19,6 @@ router.get('/',(req, res) =>{
             }else{
                console.log('an error has occured')
             }
-         });
       }else{
          res.send('invalid user')
          console.log('User authentication required')
