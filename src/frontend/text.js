@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Styles from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,6 +47,15 @@ function Text(){
 
     }
 
+    useEffect(()=>{
+        const response = async ()=>{
+            let check = await axios.get('/check');
+            if(check.data ==='failed') window.location.assign('http://localhost:3001/login')
+            console.log(check.data)
+        }
+        response()
+    })
+
     return( 
         <div>
             
@@ -83,7 +92,7 @@ function Text(){
                                                    backgroundColor:' black',
                                                    padding: '10px 10px 10px 10px'
                                            }}  id = 'body' onChange = {(e)=>onHandle(e)}/>
-                                           <input type ='submit' name = 'submit' className="form-control" value = 'send'/>
+                                           <input type ='submit' name = 'submit' className="form-control" value = 'save'/>
                                        </form>
                                     </div>
                                       
