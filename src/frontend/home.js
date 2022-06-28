@@ -78,7 +78,7 @@ function Home(){
          fetchAll()
             const interval = setInterval (()=>{
                 fetchAll()
-            },10000)
+            },1000)
 
             return()=>{
                     clearInterval(interval)
@@ -97,6 +97,22 @@ function Home(){
             console.log(result.data._id)
             setGetMessage(result.data.body)
         }
+    }
+    const setBodyMessageToReadForMobile = async (ObjectId)=>{
+        alert('Processing to read document for mobile')
+        if(blockForI === "block" && noneForM === "none"){
+            setBlockForI("none")
+            setNoneForM("block")
+        }
+        const messageId = ObjectId
+        console.log(messageId)
+        const result = await axios.post('/fetchBody',{messageId:messageId})
+        if(result.data){
+            console.log('working...')
+            console.log(result.data._id)
+            setGetMessage(result.data.body)
+        }
+
     }
 
   console.log(body)
@@ -121,7 +137,7 @@ function Home(){
                         <div className="col-sm-12 col-md-5 col-lg-4">
                             <div id = {Styles.titleContent}>
                                     <div id = {Styles.readScroll} > 
-                                           { body ? body.map((key)=>{
+                                           { body.length ? body.map((key)=>{
                                                return(
                                                 <div  key={key._id}
                                                 style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px',width:'100%',height:'60px'}}
@@ -212,7 +228,7 @@ function Home(){
                                                  id = {Styles.pick}
                                                  >
                                                     <div style = {{width:'80%',float:'left'}}>
-                                                    <p  onClick={()=>{setBodyMessageToRead(key._id)}}>{key.title}</p>
+                                                    <p  onClick={()=>{setBodyMessageToReadForMobile(key._id)}}>{key.title}</p>
                                                       <p style = {{marginTop:'-20px',fontSize:'10px'}}>{key.body.substring(0,50)}</p>
                                                
                                                     </div>
@@ -229,7 +245,7 @@ function Home(){
                                                )
                                            }):   <div
                                            style ={{backgroundColor:color,color:txtcolor,marginBottom:'10px'}}
-                                            id = {Styles.pick}>
+                                            id = {Styles.pick} >
                                                 <h1>{getMessage}</h1>
                                              </div>}
                                         
