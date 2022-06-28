@@ -1,12 +1,8 @@
-if (process.env.NODE_ENV !== "production") require('dotenv').config();
-const uri = process.env.ATLAS_URI
-
 const router = require('express').Router()
-   const { MongoClient, ServerApiVersion } = require('mongodb');
    const ObjectId = require('mongodb').ObjectId;
- const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+   const client = require('../controller/client')
 
-router.post('/',(req, res) =>{
+router.post('/',async (req, res) =>{
     const sess = req.session
     if(sess.username){
         console.log('Hello world an issue is on ground')
@@ -14,7 +10,6 @@ router.post('/',(req, res) =>{
         const UpdateRef = sess.updateId
         const body = req.body.body
         console.log(body)
-        client.connect( async err =>{
             const collection = client.db("diary").collection("notes");
                 const result = await collection.updateOne({_id:ObjectId(UpdateRef)} , {$set:{body:body}})
             if(result){
@@ -25,7 +20,6 @@ router.post('/',(req, res) =>{
                 res.send('Unable to update file')
                 console.log('An huge error has occured')
             }
-        })
     }else{
         res.send('user need to login')
         console.log('An error has occured')
