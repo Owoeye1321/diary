@@ -24,12 +24,15 @@ function SignUp() {
             password:data.password
         }
         const result = await axios.post('/signup',{details})
-        if(result.data === 'success'){
-            window.location.assign('http://localhost:3001/')
-        }else{
-            setError('invalid details')
-            console.log(result.data)
-        }
+        if (result.data === "exist") {
+            setError("User already exist");
+            console.log(result.data);
+          } else if (result.data === "success") {
+            alert("Signed Up Successfully, best wishes");
+            window.location.assign("http://localhost:3001/");
+          } else {
+            setError("Invalid details");
+          }
          
         
     }
@@ -44,7 +47,7 @@ function SignUp() {
                 </div>
                 <div className='col-sm-12 col-md-6 col-lg-4' style = {{padding:'150px 50px 50px 50px'}}>
 	                
-	                        <h4 className="mb-3">Login</h4>
+	                        <h4 className="mb-3">SignUp</h4>
 	                        <form className="input_style_1" onSubmit={(e)=>{submit(e)}}>
 	                            <div className="form-group">
 	                                <label>Username</label>
