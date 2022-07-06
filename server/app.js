@@ -22,6 +22,9 @@ app.use(function(req,res,next){
   }
   next() //otherwise continue
   });
+  app.get('/',(req, res)=>{
+    res.send('Hello world')
+  })
 app.use('/login',require('./routes/login'))
      app.use('/signUp',require('./routes/signUp'))
           app.use('/insert',require('./routes/create'))
