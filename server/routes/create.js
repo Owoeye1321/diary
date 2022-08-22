@@ -1,22 +1,25 @@
 const router = require('express').Router()
-   const client = require('../controller/client')   
+   const create = require('../model/createModel')
       router.post('/',async (req, res) =>{
-      const sess = req.session
+
          const title = req.body.details.title
         const body = req.body.details.body
-      const user = sess.username
+      const user = req.session.username
    if(user){
-             const collection = client.db("diary").collection("notes");
-          const result = await collection.insertOne({title:title, body:body, user:user})
-        if(result){
-            console.log('data saved successfully')
-               res.send('success')
-        }else{
-           console.log('An error has occured')
-         res.send('error')
-        }
-       
+            const newNote = new create({
+               title:title,
+               body:body,
+               user:user
+            })
+            await newNote.save().then((result)=>{
 
+                  res.send('success')
+                  console.log("The data has been saved to database", result)
+
+            }).catch((error)=>{
+               res.send('failed')
+               console.log('An error has occured', error)
+            })
    }else{
       console.log('Authentication required')
    }
