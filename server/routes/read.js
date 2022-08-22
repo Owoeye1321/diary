@@ -1,24 +1,17 @@
 const router = require('express').Router()
-   const client = require('../controller/client')
+   const create = require('../model/createModel')
 
 router.get('/',async (req, res) =>{
-   const sess = req.session
-   if(sess.username){
-      const username = sess.username
-      console.log(username)
-         const collection = client.db("diary").collection("notes");
-         const result = await collection.find({user:username}).toArray()
-            if(result){
-               res.json(result)
-               console.log('working on result')
-               result.map((key)=>{
-                  console.log(key._id)
-                        console.log(key.title)
-                  console.log(key.body)
-               })
-            }else{
-               console.log('an error has occured')
-            }
+   if(req.session.username){
+      const username = req.session.username
+      const findingUserNotes = await create.find({user:username})
+      if(findingUserNotes){
+         res.json(findingUserNotes)
+         console.log('The data has been sent to the frontend')
+      }else{
+         res.send('error')
+         console.log('An error has occured')
+      }
       }else{
          res.send('invalid user')
          console.log('User authentication required')
