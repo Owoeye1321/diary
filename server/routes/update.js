@@ -1,31 +1,23 @@
+require('../controller/client')
 const router = require('express').Router()
    const ObjectId = require('mongodb').ObjectId;
-   const client = require('../controller/client')
+    const create = require('../model/createModel')
 
 router.post('/',async (req, res) =>{
-    const sess = req.session
-    if(sess.username){
-        console.log('Hello world an issue is on ground')
-        console.log(req.body)
-        const UpdateRef = sess.updateId
+
+    if(req.session.username){
+        const updateId = req.session.updatedId
         const body = req.body.body
-        console.log(body)
-            const collection = client.db("diary").collection("notes");
-                const result = await collection.updateOne({_id:ObjectId(UpdateRef)} , {$set:{body:body}})
-            if(result){
-                res.send('success') 
-                    console.log('Processing result boss')
-                console.log(result)
+            const updatingData = await create.updateOne({_id:ObjectId(updateId)},{$set:{body:body}})
+            if(updatingData){
+                res.json('success')
+                console.log('The data has been updated successfully',updatingData)
             }else{
-                res.send('Unable to update file')
-                console.log('An huge error has occured')
+                res.send('Error')
+                console.log('An error has occured in updating the file')
             }
-    }else{
-        res.send('user need to login')
-        console.log('An error has occured')
-    }
-         
-      
+           
+    }      
 })
 
 

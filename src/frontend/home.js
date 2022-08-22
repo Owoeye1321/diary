@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Styles from './style.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil ,  faBookmark, faTrashCan} from '@fortawesome/free-solid-svg-icons';
+import { faPencil ,  faBookmark, faTrashCan,faSignOut} from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 function Home(){
     const [color, setColor] = useState('#000000')
@@ -21,6 +21,13 @@ function Home(){
         setGetMessage(e.target.value)
     }
 
+    const LogOut = async()=>{
+        alert('logging out')
+        const logUserOut = await axios.get('/logOut')
+        if(logUserOut.data === "success"){
+          window.location.assign('http://localhost:3001/login')
+        }
+      }
     const SubmitUpdateForDesktop = async (e)=>{
         e.preventDefault()
         const updateResponse = await axios.post('/update',{body:getMessage})
@@ -126,7 +133,11 @@ function Home(){
                         <h1 style = {{color:'white',float:'left'}}> Notepad</h1>
                         </div>
                         <div style={{float:"right"}}>
-                                    <a style = {{float:'right',marginTop:'5px'}} href = '/text'>
+                        <i style = {{float:'right',marginTop:'5px'}} 
+                        onClick={()=>{LogOut()}} className='mx-1'
+                           >
+                        <FontAwesomeIcon icon={faSignOut}  size = 'xl' style = {{color:'white'}}/> </i>
+                                    <a style = {{float:'right',marginTop:'5px'}} href = '/text' className="mx-2">
                                         <FontAwesomeIcon icon={faPencil}  size = 'xl' style = {{color:'white'}}/>
                                          </a>
 
@@ -214,10 +225,16 @@ function Home(){
             <div id = {Styles.mobile}>
             <div style = {{width:'100%',padding:'20px 20px 0px 20px'}}>
                     <h1 style = {{color:'black',float:'left'}}> Notepad</h1>
+                    <i style = {{float:'right',marginTop:'5px'}} 
+                    onClick={()=>{LogOut()}}
+                    >
+                        <FontAwesomeIcon icon={faSignOut}  size = 'xl' style = {{color:'black'}}/> </i>
+
                     <a className="mx-2" style = {{float:'right',marginTop:'5px'}} href = '/'>
                         <FontAwesomeIcon icon={faBookmark}  size = 'xl' style = {{color:'black'}}/>
                         </a>
-                    <a style = {{float:'right',marginTop:'5px'}} href = '/text'><FontAwesomeIcon icon={faPencil}  size = 'xl' style = {{color:'black'}}/> </a>
+                    <a style = {{float:'right',marginTop:'5px'}} href = '/text'>
+                        <FontAwesomeIcon icon={faPencil}  size = 'xl' style = {{color:'black'}}/> </a>
                 </div>
             <div id = {Styles.titleContent} style = {{display:blockForI}}>
                                     <div id = {Styles.readScroll}> 
