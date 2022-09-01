@@ -23,7 +23,7 @@ function SignUp() {
             email:data.email,
             password:data.password
         }
-        const result = await axios.post('/signup',{details})
+        const result = await axios.post('https://diary-app-48602.herokuapp.com/signup',{details})
         if (result.data === "exist") {
             setError("User already exist");
             console.log(result.data);

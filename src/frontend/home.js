@@ -23,14 +23,14 @@ function Home(){
 
     const LogOut = async()=>{
         alert('logging out')
-        const logUserOut = await axios.get('/logOut')
+        const logUserOut = await axios.get('https://diary-app-48602.herokuapp.com/logOut')
         if(logUserOut.data === "success"){
           window.location.assign('http://localhost:3001/login')
         }
       }
     const SubmitUpdateForDesktop = async (e)=>{
         e.preventDefault()
-        const updateResponse = await axios.post('/update',{body:getMessage})
+        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage})
         if(updateResponse.data === 'success'){
            alert('Data updated successfully')
             window.location.assign('http://localhost:3001/')
@@ -41,7 +41,7 @@ function Home(){
     }
     const SubmitMobile= async (e)=>{
         e.preventDefault()
-        const updateResponse = await axios.post('/update',{body:getMessage})
+        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage})
         if(updateResponse.data === 'success'){
             alert('Data updated successfully')
             window.location.assign('http://localhost:3001/')
@@ -54,7 +54,7 @@ function Home(){
     const trashDiary = async (trashId)=>{
         const trashingId = trashId
         console.log(trashingId)
-        const trashResult = await axios.post('/trash',{trashingId:trashingId})
+        const trashResult = await axios.post('https://diary-app-48602.herokuapp.com/trash',{trashingId:trashingId})
         
         if(trashResult.data === 'success'){
             alert('Diary deleted successfully')
@@ -66,7 +66,7 @@ function Home(){
 
     useEffect(()=>{
         const response = async ()=>{
-            let check = await axios.get('/check');
+            let check = await axios.get('https://diary-app-48602.herokuapp.com/check');
             if(check.data ==='failed') window.location.assign('http://localhost:3001/login')
             console.log(check.data)
         }
@@ -74,7 +74,7 @@ function Home(){
 
 
          const fetchAll = async () =>{
-            const result = await axios.get('/read')
+            const result = await axios.get('https://diary-app-48602.herokuapp.com/read')
             if(result.data.length){
                 setBody(result.data)
             }else{
@@ -98,7 +98,7 @@ function Home(){
         if(newTake === 'none') setNewTake('block');
         const messageId = ObjectId
         console.log(messageId)
-        const result = await axios.post('/fetchBody',{messageId:messageId})
+        const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId})
         if(result.data){
             console.log('working...')
             console.log(result.data._id)
@@ -113,7 +113,7 @@ function Home(){
         }
         const messageId = ObjectId
         console.log(messageId)
-        const result = await axios.post('/fetchBody',{messageId:messageId})
+        const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId})
         if(result.data){
             console.log('working...')
             console.log(result.data._id)
