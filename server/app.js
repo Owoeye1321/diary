@@ -1,5 +1,5 @@
-// if (process.env.NODE_ENV !== "production") require('dotenv').config();
-//    const uri = process.env.ATLAS_URI_FOR_OWOEYE
+require('dotenv').config();
+   const uri = process.env.ATLAS_URI_FOR_OWOEYE
 
 const express = require('express')
 const cookieParser = require('cookie-parser')
@@ -16,7 +16,7 @@ app.use(cookieParser())
        app.set('trust proxy', 1)
 
        let store =  MongoStore.create({
-        mongoUrl: "mongodb+srv://mongo:owoeye1234@cluster0.8tjy2.mongodb.net/diary?retryWrites=true&w=majority",
+        mongoUrl:uri,
         dbName: "diary",
         stringify: true,
         autoRemove:'native'
