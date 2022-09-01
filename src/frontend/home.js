@@ -25,7 +25,7 @@ function Home(){
         alert('logging out')
         const logUserOut = await axios.get('https://diary-app-48602.herokuapp.com/logOut')
         if(logUserOut.data === "success"){
-          window.location.assign('http://localhost:3001/login')
+          window.location.assign('https://diary-app-a890f9.netlify.app/login')
         }
       }
     const SubmitUpdateForDesktop = async (e)=>{
@@ -33,7 +33,7 @@ function Home(){
         const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage})
         if(updateResponse.data === 'success'){
            alert('Data updated successfully')
-            window.location.assign('http://localhost:3001/')
+            window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(updateResponse.data)
         }
@@ -44,7 +44,7 @@ function Home(){
         const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage})
         if(updateResponse.data === 'success'){
             alert('Data updated successfully')
-            window.location.assign('http://localhost:3001/')
+            window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(updateResponse.data)
         }
@@ -67,7 +67,7 @@ function Home(){
     useEffect(()=>{
         const response = async ()=>{
             let check = await axios.get('https://diary-app-48602.herokuapp.com/check');
-            if(check.data ==='failed') window.location.assign('http://localhost:3001/login')
+            if(check.data ==='failed') window.location.assign('https://diary-app-a890f9.netlify.app/login')
             console.log(check.data)
         }
         response()
