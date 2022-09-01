@@ -1,6 +1,5 @@
-if (process.env.NODE_ENV !== "production") require('dotenv').config();
-   const uri = process.env.ATLAS_URI_FOR_OWOEYE_LOCAL
-
+// if (process.env.NODE_ENV !== "production") require('dotenv').config();
+//    const uri = process.env.ATLAS_URI_FOR_OWOEYE
 
 const express = require('express')
 const cookieParser = require('cookie-parser')
@@ -15,6 +14,13 @@ app.use(cookieParser())
          const PORT = process.env.PORT || 4040
        const oneDay = 1000 * 60 * 60 * 24;
        app.set('trust proxy', 1)
+
+       let store =  MongoStore.create({
+        mongoUrl: "mongodb+srv://mongo:owoeye1234@cluster0.8tjy2.mongodb.net/diary?retryWrites=true&w=majority",
+        dbName: "diary",
+        stringify: true,
+        autoRemove:'native'
+      })
        app.use(session({
          proxy:true,
          secret:"OwoeyeSamuelOlamide",
@@ -24,12 +30,7 @@ app.use(cookieParser())
          cookie:{        
            maxAge:oneDay
           },  
-         store: MongoStore.create({
-           mongoUrl: uri,
-           dbName: "diary",
-           stringify: true,
-           autoRemove:'native'
-         })
+         store:store
        }))
        app.use(function(req,res,next){
          if(!req.session){
@@ -37,9 +38,11 @@ app.use(cookieParser())
          }
          next() //otherwise continue
          });
+         
   app.get('/',(req, res)=>{
     res.send('Hello world')
   })
+
 app.use('/login',require('./routes/login'))
      app.use('/signUp',require('./routes/signUp'))
           app.use('/insert',require('./routes/create'))

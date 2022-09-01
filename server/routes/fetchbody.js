@@ -1,6 +1,5 @@
 const router = require('express').Router()
    const ObjectId = require('mongodb').ObjectId;
-const { faExternalLink } = require('@fortawesome/free-solid-svg-icons');
       const create = require('../model/createModel')
 
 router.post('/',async (req, res) =>{
