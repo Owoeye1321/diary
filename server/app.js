@@ -5,11 +5,13 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const MongoStore = require('connect-mongo');
 const app = express()
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(cookieParser())
+app.use(cors())
        app.use(express.json())
          const PORT = process.env.PORT || 4040
        const oneDay = 1000 * 60 * 60 * 24;

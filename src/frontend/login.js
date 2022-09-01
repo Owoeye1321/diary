@@ -23,7 +23,7 @@ function LogIn() {
         }
         const result = await axios.post('https://diary-app-48602.herokuapp.com/login',{details})
         if(result.data === 'success'){
-            window.location.assign('http://localhost:3001/')
+            window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             setError('invalid details')
             console.log(result.data)

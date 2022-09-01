@@ -29,7 +29,7 @@ function SignUp() {
             console.log(result.data);
           } else if (result.data === "success") {
             alert("Signed Up Successfully, best wishes");
-            window.location.assign("http://localhost:3001/");
+            window.location.assign("https://diary-app-a890f9.netlify.app/");
           } else {
             setError("Invalid details");
           }

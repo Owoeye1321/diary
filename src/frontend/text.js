@@ -25,7 +25,7 @@ function Text(){
         const result = await axios.post('https://diary-app-48602.herokuapp.com/insert',{details})
         if(result.data === 'success'){
            alert('Data saved successfully')
-            window.location.assign('http://localhost:3001/')
+            window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(result.data)
         }
@@ -40,7 +40,7 @@ function Text(){
         const result = await axios.post('https://diary-app-48602.herokuapp.com/insert',{details})
         if(result.data === 'success'){
             alert('Data saved successfully')
-            window.location.assign('http://localhost:3001/')
+            window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(result.data)
         }
@@ -50,7 +50,7 @@ function Text(){
     useEffect(()=>{
         const response = async ()=>{
             let check = await axios.get('https://diary-app-48602.herokuapp.com/check');
-            if(check.data ==='failed') window.location.assign('http://localhost:3001/login')
+            if(check.data ==='failed') window.location.assign('https://diary-app-a890f9.netlify.app/login')
             console.log(check.data)
         }
         response()
