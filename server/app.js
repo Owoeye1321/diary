@@ -11,10 +11,17 @@ const app = express()
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
-  credentials: true,
-  origin:"*"
-}))
+app.use(cors())
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://diary-app-a890f9.netlify.app/");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+  "Access-Control-Allow-Headers",
+  "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+  });
        app.use(express.json())
          const PORT = process.env.PORT || 4040
        const oneDay = 1000 * 60 * 60 * 24;
