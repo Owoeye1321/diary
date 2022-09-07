@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
   credentials: true,
-  origin:"https://diary-app-a890f9.netlify.app/"
+  origin:"*"
 }))
        app.use(express.json())
          const PORT = process.env.PORT || 4040
