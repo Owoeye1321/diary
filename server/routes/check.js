@@ -17,7 +17,7 @@ router.post('/',( req, res)=>{
         res.send('failed')
         
     }else{
-        console.log(req.body.username)
+       // console.log(req.body.username)
             res.send('success')
     }
 })

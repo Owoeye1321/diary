@@ -3,7 +3,6 @@ const router = require('express').Router()
 
 router.post('/',async (req, res) =>{
    if(req.body.username !== null){
-      console.log('working happy')
       console.log(req.body.username)
       const username = req.body.username
       const findingUserNotes = await create.find({user:username})
