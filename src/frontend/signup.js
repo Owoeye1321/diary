@@ -75,7 +75,7 @@ function SignUp() {
 	                                    <a  style={{fontSize:'13px',textDecoration:'none'}}id="forgot" href="/forgetpassword">Forgot Password?</a>
 	                                </div>
 	                            </div>
-	                            <input type= 'submit' className = 'form-control success mb-3'  />
+	                            <input type= 'submit' value = "SignUp" className = 'form-control success mb-3'  />
 	                        </form>
                         <center>© 2021 DIARY PROJECT - All Rights Reserved.</center>
                         </div>
