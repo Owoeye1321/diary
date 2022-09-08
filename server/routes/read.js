@@ -2,7 +2,9 @@ const router = require('express').Router()
    const create = require('../model/createModel')
 
 router.post('/',async (req, res) =>{
-   if(req.body.username){
+   if(req.body.username !== null){
+      console.log('working happy')
+      console.log(req.body.username)
       const username = req.body.username
       const findingUserNotes = await create.find({user:username})
       if(findingUserNotes){
@@ -13,7 +15,7 @@ router.post('/',async (req, res) =>{
          console.log('An error has occured')
       }
       }else{
-         res.send('invalid user')
+         res.send('failed')
          console.log('User authentication required')
       }
       

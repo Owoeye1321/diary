@@ -4,9 +4,9 @@ const router = require('express').Router()
     const create = require('../model/createModel')
 
 router.post('/',async (req, res) =>{
-
-    if(req.session.username){
-        const updateId = req.session.updatedId
+    if(req.body.username){
+        console.log(req.body)
+        const updateId = req.body.updateId
         const body = req.body.body
             const updatingData = await create.updateOne({_id:ObjectId(updateId)},{$set:{body:body}})
             if(updatingData){

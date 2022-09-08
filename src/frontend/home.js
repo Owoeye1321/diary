@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil ,  faBookmark, faTrashCan,faSignOut} from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 function Home(){
+
+    const local_storage_username = localStorage.getItem('username')
+    const local_storage_messageId = localStorage.getItem('messageId')
     const [color, setColor] = useState('#000000')
     const [txtcolor, setTxtColor ] = useState('white')
     const [body, setBody ] = useState([])
@@ -25,12 +28,13 @@ function Home(){
         alert('logging out')
         const logUserOut = await axios.get('https://diary-app-48602.herokuapp.com/logOut')
         if(logUserOut.data === "success"){
+            localStorage.clear()
           window.location.assign('https://diary-app-a890f9.netlify.app/login')
         }
       }
     const SubmitUpdateForDesktop = async (e)=>{
         e.preventDefault()
-        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage})
+        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:local_storage_messageId})
         if(updateResponse.data === 'success'){
            alert('Data updated successfully')
             window.location.assign('https://diary-app-a890f9.netlify.app/')
@@ -41,7 +45,7 @@ function Home(){
     }
     const SubmitMobile= async (e)=>{
         e.preventDefault()
-        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage})
+        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:local_storage_messageId})
         if(updateResponse.data === 'success'){
             alert('Data updated successfully')
             window.location.assign('https://diary-app-a890f9.netlify.app/')
@@ -54,7 +58,7 @@ function Home(){
     const trashDiary = async (trashId)=>{
         const trashingId = trashId
         console.log(trashingId)
-        const trashResult = await axios.post('https://diary-app-48602.herokuapp.com/trash',{trashingId:trashingId})
+        const trashResult = await axios.post('https://diary-app-48602.herokuapp.com/trash',{trashingId:trashingId, username:local_storage_username})
         
         if(trashResult.data === 'success'){
             alert('Diary deleted successfully')
@@ -65,17 +69,13 @@ function Home(){
     }
 
     useEffect(()=>{
-        const username = localStorage.getItem('username');
-        alert('hello ,' + username)
+        
         const response = async ()=>{
-            // const re_check_for_client_session = await axios.get('https://diary-app-48602.herokuapp.com/check');
-            // if(re_check_for_client_session.data ==='success'){
-            //         console.log('Logged in successfully')
-            // }
-                const re_check_for_client_local_storage = await axios.post('https://diary-app-48602.herokuapp.com/check',username)
+            const get_user = localStorage.getItem('username');
+                const re_check_for_client_local_storage = await axios.post('https://diary-app-48602.herokuapp.com/check',{username:get_user})
                 if(re_check_for_client_local_storage === 'success'){
                     console.log('Logged in successfully')
-                }else{
+                }else if(re_check_for_client_local_storage.data === 'failed'){
                     alert('an error has occured')
                     window.location.assign('https://diary-app-a890f9.netlify.app/login')
                      console.log(re_check_for_client_local_storage.data)
@@ -86,13 +86,16 @@ function Home(){
 
 
          const fetchAll = async () =>{
-            const get_name  = localStorage.getItem(username)
+            const get_name  = localStorage.getItem("username")
 
-            const result = await axios.post('https://diary-app-48602.herokuapp.com/read',get_name)
-            if(result.data.length){
+            const result = await axios.post('https://diary-app-48602.herokuapp.com/read',{username:get_name})
+            if(result.data.length && result.data !== 'failed'){
                 setBody(result.data)
+                console.log(result.data)
             }else{
+                window.location.assign('https://diary-app-a890f9.netlify.app/login')
                 console.log('Invalid data')
+                
             }
 
          }
@@ -109,10 +112,15 @@ function Home(){
 
     const setBodyMessageToRead = async (ObjectId)=>{
         alert('Processing to read document')
-        if(newTake === 'none') setNewTake('block');
+        if(newTake === 'block') {
+            setNewTake('none');
+            setBlock('block')
+            
+        }
         const messageId = ObjectId
+        localStorage.setItem('messageId',ObjectId)
         console.log(messageId)
-        const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId})
+        const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId,username:local_storage_username})
         if(result.data){
             console.log('working...')
             console.log(result.data._id)
@@ -127,7 +135,7 @@ function Home(){
         }
         const messageId = ObjectId
         console.log(messageId)
-        const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId})
+        const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId,username:local_storage_username})
         if(result.data){
             console.log('working...')
             console.log(result.data._id)

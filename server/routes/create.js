@@ -1,11 +1,13 @@
 const router = require('express').Router()
    const create = require('../model/createModel')
       router.post('/',async (req, res) =>{
-
+            console.log(req.body)
          const title = req.body.details.title
         const body = req.body.details.body
-      const user = req.session.username
+      const user = req.body.details.user
+
    if(user){
+      console.log(user)
             const newNote = new create({
                title:title,
                body:body,
@@ -23,9 +25,6 @@ const router = require('express').Router()
    }else{
       console.log('Authentication required')
    }
-
-
-
 })
 
 module.exports = router

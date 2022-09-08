@@ -4,7 +4,7 @@ const router = require('express').Router()
 
 router.post('/',async (req, res) =>{
 
-    if(req.session.username){
+    if(req.body.username){
       console.log(req.body)
       const getId = req.body.trashingId
          const deletingData = await create.deleteOne({_id:ObjectId(getId)})
