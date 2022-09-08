@@ -49,10 +49,10 @@ function Text(){
 
     useEffect(()=>{
         const response = async ()=>{
-            const re_check_for_client_session = await axios.get('https://diary-app-48602.herokuapp.com/check');
-            if(re_check_for_client_session.data ==='success'){
-                    console.log('Logged in successfully')
-            }else{
+            // const re_check_for_client_session = await axios.get('https://diary-app-48602.herokuapp.com/check');
+            // if(re_check_for_client_session.data ==='success'){
+            //         console.log('Logged in successfully')
+            // }
                 const re_check_for_client_local_storage = await axios.post('https://diary-app-48602.herokuapp.com/check',username)
                 if(re_check_for_client_local_storage === 'success'){
                     console.log('Logged in successfully')
@@ -60,7 +60,7 @@ function Text(){
                     window.location.assign('https://diary-app-a890f9.netlify.app/login')
                      console.log(re_check_for_client_local_storage.data)
                 }
-            } 
+             
         }
         response()
     })
