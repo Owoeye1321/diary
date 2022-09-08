@@ -35,7 +35,7 @@ function LogIn() {
     }
         
     useEffect(()=>{
-        const username = localStorage.getItem('username');
+        const username = localStorage.getItem(username);
         console.log(username)
     })
     return(
