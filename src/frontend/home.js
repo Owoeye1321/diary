@@ -92,10 +92,6 @@ function Home(){
             if(result.data.length && result.data !== 'failed'){
                 setBody(result.data)
                 console.log(result.data)
-            }else{
-                window.location.assign('https://diary-app-a890f9.netlify.app/login')
-                console.log('Invalid data')
-                
             }
 
          }
