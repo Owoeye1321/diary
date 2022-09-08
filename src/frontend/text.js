@@ -43,7 +43,6 @@ function Text(){
         }
         const result = await axios.post('https://diary-app-48602.herokuapp.com/insert',{details})
         if(result.data === 'success'){
-            alert('Data saved successfully')
             window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(result.data)

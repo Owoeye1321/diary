@@ -9,14 +9,14 @@ router.post('/',async (req, res) =>{
       const findingUserNotes = await create.find({user:username})
       if(findingUserNotes){
          res.json(findingUserNotes)
-         console.log('The data has been sent to the frontend')
+         //console.log('The data has been sent to the frontend')
       }else{
          res.send('error')
-         console.log('An error has occured')
+     //    console.log('An error has occured')
       }
       }else{
          res.send('failed')
-         console.log('User authentication required')
+       //  console.log('User authentication required')
       }
       
 })
