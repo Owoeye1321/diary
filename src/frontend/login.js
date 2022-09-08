@@ -65,7 +65,7 @@ function LogIn() {
                                 </div>
 	                            <div className="clearfix mb-3">
 	                                <div className="float-left" style = {{float:'left'}}>
-                                    <i style={{fontSize:'13px'}}>Don't have an account? <a style = {{textDecoration:'none'}} href="/signup">Sign Up</a></i>
+                                    <i style={{fontSize:'13px'}}>No account? <a style = {{textDecoration:'none'}} href="/signup">Sign Up</a></i>
 	                                </div>
 	                                <div className="float-right" style ={{float:'right'}}>
 	                                    <a  style={{fontSize:'13px',textDecoration:'none'}}id="forgot" href="/forgetpassword">Forgot Password?</a>
