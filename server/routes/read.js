@@ -1,9 +1,9 @@
 const router = require('express').Router()
    const create = require('../model/createModel')
 
-router.get('/',async (req, res) =>{
-   if(req.session.username){
-      const username = req.session.username
+router.post('/',async (req, res) =>{
+   if(req.body.username){
+      const username = req.body.username
       const findingUserNotes = await create.find({user:username})
       if(findingUserNotes){
          res.json(findingUserNotes)

@@ -86,7 +86,9 @@ function Home(){
 
 
          const fetchAll = async () =>{
-            const result = await axios.get('https://diary-app-48602.herokuapp.com/read')
+            const get_name  = localStorage.getItem(username)
+
+            const result = await axios.post('https://diary-app-48602.herokuapp.com/read',get_name)
             if(result.data.length){
                 setBody(result.data)
             }else{
