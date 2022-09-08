@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 
@@ -34,7 +34,10 @@ function LogIn() {
         
     }
         
-
+    useEffect(()=>{
+        const username = localStorage.getItem('username');
+        console.log(username)
+    })
     return(
 
     <div>
