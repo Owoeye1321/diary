@@ -65,11 +65,11 @@ function Home(){
     }
 
     useEffect(()=>{
-        const hello = localStorage.getItem(username);
-        alert("hello ," + hello)
+        const username = localStorage.getItem('username');
+        alert('hello ,' + username)
         const response = async ()=>{
             let check = await axios.get('https://diary-app-48602.herokuapp.com/check');
-            if(check.data ==='failed') window.location.assign('https://diary-app-a890f9.netlify.app/login')
+            if(check.data ==='failed') window.location.assign('https://diary-app-48602.herokuapp.com/login')
             console.log(check.data)
         }
         response()

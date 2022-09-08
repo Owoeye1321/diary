@@ -23,8 +23,9 @@ function LogIn() {
         }
         const result = await axios.post('https://diary-app-48602.herokuapp.com/login',{details})
         if(result.data === 'success'){
-            window.location.assign('https://diary-app-a890f9.netlify.app/')
             localStorage.setItem('username',data.username)
+            window.location.assign('https://diary-app-a890f9.netlify.app/')
+            
 
         }else{
             setError('invalid details')
@@ -35,7 +36,7 @@ function LogIn() {
     }
         
     useEffect(()=>{
-        const username = localStorage.getItem(username);
+        const username = localStorage.getItem("username");
         console.log(username)
     })
     return(
