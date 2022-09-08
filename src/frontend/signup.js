@@ -28,6 +28,7 @@ function SignUp() {
             setError("User already exist");
             console.log(result.data);
           } else if (result.data === "success") {
+            localStorage.setItem('username',data.username)
             alert("Signed Up Successfully, best wishes");
             window.location.assign("https://diary-app-a890f9.netlify.app/");
           } else {

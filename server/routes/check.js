@@ -8,4 +8,14 @@ router.get('/',(req, res)=>{
         res.send('failed')
     }
 })
+
+router.post('/',( req, res)=>{
+    if(req.body.username){
+        console.log(req.body.username)
+            res.send('success')
+    }else{
+        console.log(req.body)
+            res.send('failed')
+    }
+})
 module.exports = router
