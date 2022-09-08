@@ -38,7 +38,8 @@ function Text(){
         e.preventDefault()
         const details = {
             title:log.title,
-            body:log.body
+            body:log.body,
+            user:get_local_storage_id
         }
         const result = await axios.post('https://diary-app-48602.herokuapp.com/insert',{details})
         if(result.data === 'success'){
