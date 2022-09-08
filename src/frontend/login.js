@@ -25,6 +25,7 @@ function LogIn() {
         if(result.data === 'success'){
             window.location.assign('https://diary-app-a890f9.netlify.app/')
             localStorage.setItem('username',data.username)
+
         }else{
             setError('invalid details')
             console.log(result.data)

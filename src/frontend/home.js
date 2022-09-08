@@ -65,6 +65,8 @@ function Home(){
     }
 
     useEffect(()=>{
+            const username = localStorage.getItem('name')
+        alert("hello ," + username)
         const response = async ()=>{
             let check = await axios.get('https://diary-app-48602.herokuapp.com/check');
             if(check.data ==='failed') window.location.assign('https://diary-app-a890f9.netlify.app/login')

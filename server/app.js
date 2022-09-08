@@ -25,6 +25,7 @@ app.use(function(req, res, next) {
        app.use(express.json())
          const PORT = process.env.PORT || 4040
        const oneDay = 1000 * 60 * 60 * 24;
+       const littleMinutes = 1000 * 60 * 10;
        app.set('trust proxy', 1)
 
        let store =  MongoStore.create({
@@ -40,7 +41,7 @@ app.use(function(req, res, next) {
          resave:false,
        
          cookie:{        
-           maxAge:oneDay
+           maxAge:littleMinutes
           },  
          store:store
        }))
