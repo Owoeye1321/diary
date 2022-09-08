@@ -65,7 +65,7 @@ function Home(){
     }
 
     useEffect(()=>{
-            const username = localStorage.getItem('name')
+            const username = localStorage.getItem(username)
         alert("hello ," + username)
         const response = async ()=>{
             let check = await axios.get('https://diary-app-48602.herokuapp.com/check');
