@@ -91,13 +91,13 @@ function Home(){
          }
          fetchAll()
          
-            const interval = setInterval (()=>{
-                fetchAll()
-            },1000)
+            // const interval = setInterval (()=>{
+            //     fetchAll()
+            // },1000)
 
-            return()=>{
-                    clearInterval(interval)
-            }
+            // return()=>{
+            //         clearInterval(interval)
+            // }
         
     },[body])
 
