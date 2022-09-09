@@ -95,19 +95,10 @@ function Home(){
 
          }
          fetchAll()
-         
-            // const interval = setInterval (()=>{
-            //     fetchAll()
-            // },1000)
-
-            // return()=>{
-            //         clearInterval(interval)
-            // }
         
     },[body])
 
     const setBodyMessageToRead = async (ObjectId)=>{
-        alert('Processing to read document')
         if(newTake === 'block') {
             setNewTake('none');
             setBlock('block')
@@ -124,7 +115,6 @@ function Home(){
         }
     }
     const setBodyMessageToReadForMobile = async (ObjectId)=>{
-        alert('Processing to read document for mobile')
         if(blockForI === "block" && noneForM === "none"){
             setBlockForI("none")
             setNoneForM("block")

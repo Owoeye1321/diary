@@ -4,8 +4,8 @@ const router = require('express').Router()
     const create = require('../model/createModel')
 
 router.post('/',async (req, res) =>{
-    if(req.body.username){
-        console.log(req.body)
+    if(req.body.username && req.body.updateId){
+      //  console.log(req.body)
         const updateId = req.body.updateId
         const body = req.body.body
             const updatingData = await create.updateOne({_id:ObjectId(updateId)},{$set:{body:body}})
@@ -17,7 +17,9 @@ router.post('/',async (req, res) =>{
                 console.log('An error has occured in updating the file')
             }
            
-    }      
+    }else{
+        console.log('No username or updating id to update')
+    }    
 })
 
 
