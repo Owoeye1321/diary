@@ -4,6 +4,7 @@ import axios from 'axios'
 
 
 function SignUp() { 
+    const [username, setUsername] = useState('')
     const [error, setError] = useState('Password must be more than 8 character')
     const [data, setData ] = useState({
         username:'',
@@ -28,8 +29,8 @@ function SignUp() {
             setError("User already exist");
             console.log(result.data);
           } else if (result.data === "success") {
-            localStorage.setItem('username',data.username)
-            alert("Signed Up Successfully, best wishes");
+            setUsername(data.username)
+            localStorage.setItem('username',username)
             window.location.assign("https://diary-app-a890f9.netlify.app/");
           } else {
             setError("Invalid details");
