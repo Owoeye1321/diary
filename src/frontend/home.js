@@ -99,7 +99,7 @@ function Home(){
                     clearInterval(interval)
             }
         
-    },[])
+    },[body])
 
     const setBodyMessageToRead = async (ObjectId)=>{
         alert('Processing to read document')
