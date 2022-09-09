@@ -56,9 +56,14 @@ function Home(){
     const trashDiary = async (trashId)=>{
         const trashingId = trashId
         console.log(trashingId)
-        const trashResult = await axios.post('https://diary-app-48602.herokuapp.com/trash',{trashingId:trashingId, username:local_storage_username})
-        
-        if(trashResult.data === 'success') alert('Diary deleted successfully');
+        await axios.post('https://diary-app-48602.herokuapp.com/trash',{trashingId:trashingId, username:local_storage_username},( error, result)=>{
+            if(error){
+                console.log('Unable to delete data')
+            }else{
+                console.log('data deleted successfully')
+            }
+        })
+    
         
     }
 
