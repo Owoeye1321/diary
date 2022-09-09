@@ -134,7 +134,6 @@ function Home(){
 
     }
 
-  console.log(body)
 
     return( 
         <div>
