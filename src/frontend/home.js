@@ -20,7 +20,7 @@ function Home(){
    
 
     const onHandle = async (e)=>{
-        console.log(e.target.value)
+      //  console.log(e.target.value)
         setGetMessage(e.target.value)
     }
 
