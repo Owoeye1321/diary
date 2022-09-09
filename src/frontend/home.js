@@ -25,7 +25,6 @@ function Home(){
     }
 
     const LogOut = async()=>{
-        alert('logging out')
         const logUserOut = await axios.get('https://diary-app-48602.herokuapp.com/logOut')
         if(logUserOut.data === "success"){
             localStorage.clear()
@@ -42,7 +41,7 @@ function Home(){
     }
     const SubmitMobile= async (e)=>{
         e.preventDefault()
-        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:localStorage.getItem('messageId')})
+        const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:local_storage_messageId})
         if(updateResponse.data === 'success'){
             window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
