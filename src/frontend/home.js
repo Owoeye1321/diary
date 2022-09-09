@@ -82,21 +82,26 @@ function Home(){
          const fetchAll = async () =>{
             const get_name  = localStorage.getItem("username")
 
-            const result = await axios.post('https://diary-app-48602.herokuapp.com/read',{username:get_name})
-            if(result.data.length && result.data !== 'failed'){
-                setBody(result.data)
-               // console.log(result.data)
-            }
+            await axios.post('https://diary-app-48602.herokuapp.com/read',{username:get_name},( error, result)=>{
+                if(result.data.length && result.data !== 'failed'){
+                    setBody(result.data)
+                }
+            })
+            // if(result.data.length && result.data !== 'failed'){
+            //     setBody(result.data)
+            //    // console.log(result.data)
+            // }
 
          }
          fetchAll()
-            const interval = setInterval (()=>{
-                fetchAll()
-            },1000)
 
-            return()=>{
-                    clearInterval(interval)
-            }
+            // const interval = setInterval (()=>{
+            //     fetchAll()
+            // },1000)
+
+            // return()=>{
+            //         clearInterval(interval)
+            // }
         
     },[])
 
