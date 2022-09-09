@@ -38,8 +38,6 @@ function Home(){
         if(updateResponse.data === 'success'){
            alert('Data updated successfully')
             window.location.assign('https://diary-app-a890f9.netlify.app/')
-        }else{
-            console.log(updateResponse.data)
         }
 
     }
@@ -60,11 +58,7 @@ function Home(){
         console.log(trashingId)
         const trashResult = await axios.post('https://diary-app-48602.herokuapp.com/trash',{trashingId:trashingId, username:local_storage_username})
         
-        if(trashResult.data === 'success'){
-            alert('Diary deleted successfully')
-        }else{
-            console.log(trashResult.data)
-        }
+        if(trashResult.data === 'success') alert('Diary deleted successfully');
         
     }
 
@@ -78,7 +72,7 @@ function Home(){
                 }else if(re_check_for_client_local_storage.data === 'failed'){
                     alert('Login to proceed')
                     window.location.assign('https://diary-app-a890f9.netlify.app/login')
-                     console.log(re_check_for_client_local_storage.data)
+                   //  console.log(re_check_for_client_local_storage.data)
                 }
             
         }
@@ -91,7 +85,7 @@ function Home(){
             const result = await axios.post('https://diary-app-48602.herokuapp.com/read',{username:get_name})
             if(result.data.length && result.data !== 'failed'){
                 setBody(result.data)
-                console.log(result.data)
+               // console.log(result.data)
             }
 
          }
@@ -119,7 +113,7 @@ function Home(){
         const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId,username:local_storage_username})
         if(result.data){
             console.log('working...')
-            console.log(result.data._id)
+         //   console.log(result.data._id)
             setGetMessage(result.data.body)
         }
     }
@@ -134,7 +128,7 @@ function Home(){
         const result = await axios.post('https://diary-app-48602.herokuapp.com/fetchBody',{messageId:messageId,username:local_storage_username})
         if(result.data){
             console.log('working...')
-            console.log(result.data._id)
+          //  console.log(result.data._id)
             setGetMessage(result.data.body)
         }
 
