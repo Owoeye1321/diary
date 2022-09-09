@@ -4,7 +4,6 @@ import axios from 'axios'
 
 
 function LogIn() {
-    const [username, setUsername] = useState('')
     const [error, setError] = useState('')
     const [data, setData ] = useState({
         username:'',
@@ -24,8 +23,7 @@ function LogIn() {
         }
         const result = await axios.post('https://diary-app-48602.herokuapp.com/login',{details})
         if(result.data === 'success'){
-            setUsername(data.username)
-            localStorage.setItem('username',username)
+            localStorage.setItem('username',data.username)
             window.location.assign('https://diary-app-a890f9.netlify.app/')
             
 
