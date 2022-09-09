@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 function SignUp() { 
-    const [error, setError] = useState('')
+    const [error, setError] = useState('Password must be more than 8 character')
     const [data, setData ] = useState({
         username:'',
         email:'',

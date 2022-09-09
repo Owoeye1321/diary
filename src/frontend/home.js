@@ -76,7 +76,7 @@ function Home(){
                 if(re_check_for_client_local_storage === 'success'){
                     console.log('Logged in successfully')
                 }else if(re_check_for_client_local_storage.data === 'failed'){
-                    alert('an error has occured')
+                    alert('Login to proceed')
                     window.location.assign('https://diary-app-a890f9.netlify.app/login')
                      console.log(re_check_for_client_local_storage.data)
                 }
