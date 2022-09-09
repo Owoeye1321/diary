@@ -36,7 +36,6 @@ function Home(){
         e.preventDefault()
         const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:local_storage_messageId})
         if(updateResponse.data === 'success'){
-           alert('Data updated successfully')
             window.location.assign('https://diary-app-a890f9.netlify.app/')
         }
 
@@ -45,7 +44,6 @@ function Home(){
         e.preventDefault()
         const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:localStorage.getItem('messageId')})
         if(updateResponse.data === 'success'){
-            alert('Data updated successfully')
             window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(updateResponse.data)
