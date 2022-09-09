@@ -241,7 +241,9 @@ function Home(){
                     onClick={()=>{LogOut()}}
                     >
                         <FontAwesomeIcon icon={faSignOut}  size = 'xl' style = {{color:'black'}}/> </i>
-                    <a style = {{float:'right',marginTop:'5px'}} href = '/text'>
+
+                  
+                    <a className="mx-2"  style = {{float:'right',marginTop:'5px'}} href = '/text'>
                         <FontAwesomeIcon icon={faPencil}  size = 'xl' style = {{color:'black'}}/> </a>
                 </div>
             <div id = {Styles.titleContent} style = {{display:blockForI}}>
