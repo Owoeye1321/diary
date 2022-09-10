@@ -9,12 +9,13 @@ router.post('/',async(req, res) =>{
    async function main() {
 
                   const email = req.body.data.email
-                    await user.find({email:email},( request , response)=>{
-                        console.log(response)
-                    })
+                    await user.find({email:email},( errorOnSendingData , response)=>{
+                       if(response){
+                         console.log(response)
+                        res.send('success')
 
-
-                // create reusable transporter object using the default SMTP transport
+                       response.map((key)=>{
+                              // create reusable transporter object using the default SMTP transport
                     let transporter = await nodemailer.createTransport({
                       host: "smtp.gmail.com",
                           port: 465,
@@ -31,7 +32,7 @@ router.post('/',async(req, res) =>{
                from:email, // sender address
                     to: "Owoeye1321@gmail.com", // list of receivers
                         subject: subject, // Subject line
-                   html:`<h1>Hello C -Rentals</h1> <h5>I'm ${fname} </h5> \n <h6>${message}</h6>` // plain text body
+                   html:`<h1>Hello there! ${key.username} </h1> \n <h5>Your password is ${key.password} </h5>` // plain text body
             },(err, result)=>{
                 if(!err){ 
                     console.log('working on sending the emails')
@@ -41,7 +42,17 @@ router.post('/',async(req, res) =>{
                     console.log('An error has occured and an issue need to be fixed')
                         console.log(err)
                     }
+                       })
+                  
             }); 
+        }else{
+            console.log(errorOnSendingData)
+        }
+                       
+                    })
+
+
+               
         // console.log("Message sent: %s", info.messageId);
             // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
             // Preview only available when sending through an Ethereal account
