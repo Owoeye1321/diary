@@ -27,7 +27,7 @@ function App() {
             <Route path='/signup'  element = {< SignUp/> }/>
 
 
-            <Route path='/forgetPassword'  element = {< Forgetpassword/> }/>
+            <Route path='/forgetpassword'  element = {< Forgetpassword/> }/>
 
 
 
