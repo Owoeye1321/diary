@@ -8,13 +8,13 @@ router.post('/',async(req, res) =>{
    
    async function main() {
 
-                  const email = req.body.data.email
+                  const email = req.body.email
                     await user.find({email:email},( errorOnSendingData , response)=>{
                        if(response){
                          console.log(response)
                         res.send('success')
 
-                       response.map((key)=>{
+                       response.map( async (key)=>{
                               // create reusable transporter object using the default SMTP transport
                     let transporter = await nodemailer.createTransport({
                       host: "smtp.gmail.com",
@@ -28,7 +28,7 @@ router.post('/',async(req, res) =>{
                     if(!err)console.log(result);console.log(err)
                 });
             // send mail with defined transport object
-             await transporter.sendMail({
+            let info = await transporter.sendMail({
                from:email, // sender address
                     to: "Owoeye1321@gmail.com", // list of receivers
                         subject: subject, // Subject line
@@ -56,7 +56,7 @@ router.post('/',async(req, res) =>{
         // console.log("Message sent: %s", info.messageId);
             // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
             // Preview only available when sending through an Ethereal account
-            // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+             console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
             // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
         }
         
