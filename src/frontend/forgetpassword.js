@@ -15,7 +15,7 @@ function Forgetpassword() {
         const result = await axios.post('https://diary-app-48602.herokuapp.com/forgetpassword',{
             email:email
         })
-        if(result){
+        if(result.data === 'success'){
             console.log('working on the result')
             console.log(result)
         }
@@ -57,4 +57,4 @@ function Forgetpassword() {
     )
 }
 
-export default Forgetpassword
+export default Forgetpassword;

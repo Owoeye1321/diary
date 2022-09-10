@@ -3,7 +3,7 @@ import Home from './frontend/home';
 import LogIn from './frontend/login';
 import SignUp from './frontend/signup';
 import Text from './frontend/text';
-import Forgetpassword from './frontend/forgetpassword'
+import Forgetpassword from './frontend/forgetpassword';
 
 function App() {
   return (
@@ -26,7 +26,11 @@ function App() {
     
             <Route path='/signup'  element = {< SignUp/> }/>
 
-            <Route path='/forgetpassword'  element = {< Forgetpassword/> }/>
+
+            <Route path='/forgetPassword'  element = {< Forgetpassword/> }/>
+
+
+
         
        
 
