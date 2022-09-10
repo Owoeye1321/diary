@@ -26,7 +26,7 @@ function Forgetpassword() {
                 <div className='col-sm-12 col-md-4 col-lg-4'>
 
                 </div>
-                <div className='col-sm-12 col-md-4 col-lg-4 my-5' style = {{padding:'150px 50px 50px 50px'}}>
+                <div className='col-sm-12 col-md-4 col-lg-4 my-5' style = {{padding:'70px 50px 50px 50px'}}>
 	                        <form className="input_style_1" method="post" onSubmit={(e)=>{submitThisShit(e)}}>
 	                            <div id="forgot_pw my-5">
 	                                <h4 className="my-5">Forgot Password</h4>
