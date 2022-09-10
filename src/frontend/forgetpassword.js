@@ -29,7 +29,7 @@ function Forgetpassword() {
                 <div className='col-sm-12 col-md-4 col-lg-4 my-5' style = {{padding:'70px 50px 50px 50px'}}>
 	                        <form className="input_style_1" method="post" onSubmit={(e)=>{submitThisShit(e)}}>
 	                            <div id="forgot_pw my-5">
-	                                <h4 className="my-2">Forgot Password</h4>
+	                                <h4 className="mb-3">Forgot Password</h4>
                                     <div className="form-group mb-4">
               <input
                 onChange={(e) => handle(e)}
