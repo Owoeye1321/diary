@@ -16,9 +16,6 @@ router.post('/',async(req, res) =>{
         const email = req.body.email
          const response =  await user.find({email:email})
              if(response){
-               console.log(response)
-              res.send('success')
-
              response.map( async (key)=>{
                     // create reusable transporter object using the default SMTP transport
           let transporter = await nodemailer.createTransport({
@@ -53,7 +50,7 @@ router.post('/',async(req, res) =>{
                          console.log(result);
                          res.send('success');
                      } else {
-                        res.send('failes')
+                        res.send('failed')
                          console.log('An error has occured and an issue need to be fixed');
                          console.log(err);
                      }
@@ -61,6 +58,7 @@ router.post('/',async(req, res) =>{
         
   }); 
 }else{
+    res.send('failed')
   console.log("Unable to send email details")
 }
              
