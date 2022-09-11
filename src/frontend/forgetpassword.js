@@ -35,7 +35,7 @@ function Forgetpassword() {
 	                        <form className="input_style_1" method="post" onSubmit={(e)=>{submitThisShit(e)}}>
 	                            <div id="forgot_pw my-5">
 	                                <h4 className="mb-3">Forgot Password</h4>
-                                    <div className="form-group mb-4">
+                                    <div className="form-group mb-3">
               <input
                 onChange={(e) => handle(e)}
                 type="email"
@@ -44,7 +44,7 @@ function Forgetpassword() {
                 className="form-control"
               />
             </div>
-            <div  style={{ fontSize: '10px' ,marginBottom: '0px'}}>
+            <div  style={{ fontSize: '10px' ,marginBottom: '-100px'}}>
                                     <center>
                                     <i style={{marginBottom:"-1px",color:'red'}}>{error}</i>
                                     </center>
