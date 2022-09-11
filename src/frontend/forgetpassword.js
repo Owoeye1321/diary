@@ -46,7 +46,7 @@ function Forgetpassword() {
             </div>
             <div style={{ fontSize: '10px' ,marginTop: '-40px'}}>
                                     <center>
-                                    <i style={{marginBottom:"3px",color:'red'}}>{error}</i>
+                                    <i style={{marginBottom:"5px",color:'red'}}>{error}</i>
                                     </center>
                                 </div>
 	                                <p>You will receive an email containing your password.</p>
