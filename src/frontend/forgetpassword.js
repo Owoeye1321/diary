@@ -17,6 +17,7 @@ function Forgetpassword() {
             email:email
         })
         if(result.data === 'success'){
+            setError("<i style ='color:green'>Password sent to email</i")
             console.log('working on the result')
             console.log(result)
         }else if(result.data === 'error'){

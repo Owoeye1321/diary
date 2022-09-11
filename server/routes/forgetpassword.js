@@ -16,7 +16,7 @@ router.post('/',async(req, res) =>{
         const email = req.body.email
          const response =  await user.findOne({email:email})
              if(response){
-             response.map( async (key)=>{
+              console.log(response)
                     // create reusable transporter object using the default SMTP transport
           let transporter = await nodemailer.createTransport({
           //   host: "smtp.gmail.com",
@@ -41,9 +41,9 @@ router.post('/',async(req, res) =>{
   // send mail with defined transport object
    transporter.sendMail({
                      from: "Owoeye1321@gmail.com",
-                     to: key.email,
+                     to: response.email,
                      subject: "Forget Password Reset",
-                     html: `<h1>Hello ${key.username}, </h1> \n <h5>Your password is ${key.password} </h5>` // plain text body
+                     html: `<h1>Hello ${response.username}, </h1> \n <h5>Your password is ${response.password} </h5>` // plain text body
                  }, (err, result) => {
                      if (!err) {
                          console.log('working on sending the emails');
@@ -56,7 +56,6 @@ router.post('/',async(req, res) =>{
                      }
                  })
         
-  }); 
             }else{
                 res.send('failed')
             console.log("Unable to send email details")
