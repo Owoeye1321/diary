@@ -44,7 +44,7 @@ function Forgetpassword() {
                 className="form-control"
               />
             </div>
-            <div style={{ fontSize: '10px' ,marginTop: '-40px'}}>
+            <div style={{ fontSize: '10px' ,marginTop: '0px'}}>
                                     <center>
                                     <i style={{marginBottom:"5px",color:'red'}}>{error}</i>
                                     </center>
