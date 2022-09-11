@@ -5,6 +5,7 @@ import axios from 'axios'
 function Forgetpassword() {
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
+    const [state, setState]= useState('red')
 
     const handle = (e)=>{
         setEmail(e.target.value)
@@ -17,8 +18,8 @@ function Forgetpassword() {
             email:email
         })
         if(result.data === 'success'){
-            setError("<i style ='color:green'>Password sent to email</i>")
-            console.log('working on the result')
+            setState('green')
+            setError("Password has been sent to email")
             console.log(result)
         }else if(result.data === 'error'){
             setError('No email provided')
@@ -47,7 +48,7 @@ function Forgetpassword() {
             </div>
             <div style={{ fontSize: '10px' ,marginBottom: '5'}}>
                                     <center>
-                                    <i style={{marginBottom:"5px",color:'red'}}>{error}</i>
+                                    <i style={{marginBottom:"5px",color:state}}>{error}</i>
                                     </center>
                                 </div>
 	                                <p>You will receive an email containing your password.</p>
