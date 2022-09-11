@@ -44,6 +44,11 @@ function Forgetpassword() {
                 className="form-control"
               />
             </div>
+            <div  style={{ fontSize: '10px' ,marginBottom: '0px'}}>
+                                    <center>
+                                    <i style={{marginBottom:"-1px",color:'red'}}>{error}</i>
+                                    </center>
+                                </div>
 	                                <p>You will receive an email containing your password.</p>
 	                                <div className="text-center"><input type="submit" value="Reset Password" className="form-control "/></div>
 	                            </div>
