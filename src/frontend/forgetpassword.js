@@ -39,7 +39,7 @@ function Forgetpassword() {
                 className="form-control"
               />
             </div>
-	                                <p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+	                                <p>You will receive an email containing your password.</p>
 	                                <div className="text-center"><input type="submit" value="Reset Password" className="form-control "/></div>
 	                            </div>
 	                        </form>
