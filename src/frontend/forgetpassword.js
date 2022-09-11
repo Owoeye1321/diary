@@ -4,6 +4,7 @@ import axios from 'axios'
 
 function Forgetpassword() {
     const [email, setEmail] = useState('')
+    const [error, setError] = useState('')
 
     const handle = (e)=>{
         setEmail(e.target.value)
@@ -18,7 +19,11 @@ function Forgetpassword() {
         if(result.data === 'success'){
             console.log('working on the result')
             console.log(result)
-        }
+        }else if(result.data === 'error'){
+            setError('No email provided')
+        }else if(result.data === 'failed'){
+            setError('No password attached to this email')
+        } 
     }
     return (
 
