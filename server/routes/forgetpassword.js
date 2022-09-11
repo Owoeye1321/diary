@@ -14,7 +14,7 @@ router.post('/',async(req, res) =>{
     async function main() {
 
         const email = req.body.email
-         const response =  await user.find({email:email})
+         const response =  await user.findOne({email:email})
              if(response){
              response.map( async (key)=>{
                     // create reusable transporter object using the default SMTP transport
@@ -57,10 +57,10 @@ router.post('/',async(req, res) =>{
                  })
         
   }); 
-}else{
-    res.send('failed')
-  console.log("Unable to send email details")
-}
+            }else{
+                res.send('failed')
+            console.log("Unable to send email details")
+            }
              
 
 
