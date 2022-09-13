@@ -27,10 +27,10 @@ function SignUp() {
         if (result.data === "exist") {
             setError("User already exist");
             console.log(result.data);
-          } else if (result.data === "success") {
+          }else if(result.data === "success") {
             localStorage.setItem('username',data.username)
             window.location.assign("https://diary-app-a890f9.netlify.app/");
-          } else {
+          }else {
             setError("Invalid details");
           }
          
