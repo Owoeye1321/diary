@@ -10,7 +10,7 @@ const router = require ('express').Router()
 // })
 
 router.post('/',( req, res)=>{
-    console.log(req.body)
+    //console.log(req.body)
     if(!req.body.username){
         console.log(req.body)
         console.log('failed')
