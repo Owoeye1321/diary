@@ -308,7 +308,7 @@ function Home(){
             </div>
             <div>
                 <center>
-                <a href="https://mainstack.me/cyberxurde" style={{color:"black"}}>The Brain box</a>
+                <a href="https://mainstack.me/cyberxurde" style={{color:"black",textDecoration:'none'}}>The Brain box</a>
                 </center>
             </div>
         </div>
