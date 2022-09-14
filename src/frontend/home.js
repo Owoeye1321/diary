@@ -43,6 +43,10 @@ function Home(){
         e.preventDefault()
         const updateResponse = await axios.post('https://diary-app-48602.herokuapp.com/update',{body:getMessage,username:local_storage_username,updateId:local_storage_messageId})
         if(updateResponse.data === 'success'){
+            if(blockForI === "none" && noneForM === "block"){
+                setBlockForI("block")
+                setNoneForM("none")
+            }
             window.location.assign('https://diary-app-a890f9.netlify.app/')
         }else{
             console.log(updateResponse.data)
