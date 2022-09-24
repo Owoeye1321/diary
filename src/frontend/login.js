@@ -16,7 +16,7 @@ function LogIn() {
     }
 
     const submit = async (e)=>{
-        e.preventDefault()
+        e.preventDefault() 
         const details = {
             username:data.username,
             password:data.password

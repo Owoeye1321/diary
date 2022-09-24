@@ -1,4 +1,4 @@
- require('dotenv').config();
+if(process.env.NODE_ENV !== 'production')require('dotenv').config();
    const uri = process.env.ATLAS_URI_FOR_OWOEYE
    
    const mongoose = require('mongoose')

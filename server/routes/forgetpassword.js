@@ -1,4 +1,4 @@
-require('dotenv').config();
+if(process.env.NODE_ENV !== 'production')require('dotenv').config();
    const clientId = process.env.client_id
    const client_secret = process.env.client_secret
    const token_uri = process.env.token_uri
